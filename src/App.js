@@ -4,12 +4,14 @@ import EstimatePage from "./EstimatePage";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<QuoteForm />} />
-        <Route path="/estimate" element={<EstimatePage />} />
-      </Routes>
-    </Router>
+    <div className="min-h-screen bg-[#E3FEFF] flex items-center justify-center">
+      <Router>
+        <Routes>
+          <Route path="/" element={<QuoteForm />} />
+          <Route path="/estimate" element={<EstimatePage />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
