@@ -10,15 +10,15 @@ const EstimatePage = () => {
     .map(([key]) => {
       switch (key) {
         case "cornersAndBaseboards":
-          return "Dust corners and baseboards (20%)";
+          return "Dust corners and baseboards";
         case "blinds":
-          return "Dust blinds (25%)";
+          return "Dust blinds";
         case "fansAndFixtures":
-          return "Dust ceiling fans and light fixtures (10%)";
+          return "Dust ceiling fans and light fixtures";
         case "switchPlates":
-          return "Clean switch plates, outlet plates, doors, and door knobs (20%)";
+          return "Clean switch plates, outlet plates, doors, and door knobs";
         case "windows":
-          return "Clean interior windows & window sills (25%)";
+          return "Clean interior windows & window sills";
         default:
           return "";
       }

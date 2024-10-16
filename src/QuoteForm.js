@@ -147,7 +147,8 @@ const QuoteForm = () => {
       const estimate = calculateEstimate(
         formData.size,
         formData.cleaningType,
-        formData.frequency
+        formData.frequency,
+        formData.additionalServices
       );
 
       // Redirect to the estimate page with the form data
@@ -181,9 +182,15 @@ const QuoteForm = () => {
   };
 
   // Function to calculate the estimate
-  const calculateEstimate = (size, cleaningType, frequency) => {
+  const calculateEstimate = (
+    size,
+    cleaningType,
+    frequency,
+    additionalServices
+  ) => {
     const sqft = Number(size);
     let factor = 0;
+    let factorTotal = 0;
 
     if (cleaningType === "Regular") {
       switch (frequency) {
@@ -202,6 +209,7 @@ const QuoteForm = () => {
         default:
           break;
       }
+      factorTotal = factor + 0.02;
     } else if (cleaningType === "Total") {
       switch (frequency) {
         case "Weekly":
@@ -223,7 +231,30 @@ const QuoteForm = () => {
       factor = 0.2;
     }
 
-    return sqft * factor;
+    let estimate = sqft * factor;
+    console.log("Regular estimate: " + estimate);
+    console.log("Total estimate: " + sqft * factorTotal);
+    if (cleaningType === "Regular") {
+      if (additionalServices.cornersAndBaseboards) {
+        estimate += (sqft * factorTotal - sqft * factor) * 0.2;
+      }
+      if (additionalServices.blinds) {
+        estimate += (sqft * factorTotal - sqft * factor) * 0.25;
+      }
+      if (additionalServices.fansAndFixtures) {
+        estimate += (sqft * factorTotal - sqft * factor) * 0.1;
+      }
+      if (additionalServices.switchPlates) {
+        estimate += (sqft * factorTotal - sqft * factor) * 0.2;
+      }
+      if (additionalServices.windows) {
+        estimate += (sqft * factorTotal - sqft * factor) * 0.25;
+      }
+    }
+
+    console.log("Final estimate: " + estimate);
+
+    return estimate;
   };
 
   return (
@@ -349,7 +380,7 @@ const QuoteForm = () => {
               checked={formData.additionalServices.cornersAndBaseboards}
               onChange={handleChange}
             />
-            <label className="ml-2">Dust corners and baseboards (20%)</label>
+            <label className="ml-2">Dust corners and baseboards</label>
           </div>
           <div>
             <input
@@ -358,7 +389,7 @@ const QuoteForm = () => {
               checked={formData.additionalServices.blinds}
               onChange={handleChange}
             />
-            <label className="ml-2">Dust blinds (25%)</label>
+            <label className="ml-2">Dust blinds</label>
           </div>
           <div>
             <input
@@ -367,9 +398,7 @@ const QuoteForm = () => {
               checked={formData.additionalServices.fansAndFixtures}
               onChange={handleChange}
             />
-            <label className="ml-2">
-              Dust ceiling fans and light fixtures (10%)
-            </label>
+            <label className="ml-2">Dust ceiling fans and light fixtures</label>
           </div>
           <div>
             <input
@@ -379,7 +408,7 @@ const QuoteForm = () => {
               onChange={handleChange}
             />
             <label className="ml-2">
-              Clean switch plates, outlet plates, doors, and door knobs (20%)
+              Clean switch plates, outlet plates, doors, and door knobs
             </label>
           </div>
           <div>
@@ -390,7 +419,7 @@ const QuoteForm = () => {
               onChange={handleChange}
             />
             <label className="ml-2">
-              Clean interior windows & window sills (25%)
+              Clean interior windows & window sills
             </label>
           </div>
         </div>
