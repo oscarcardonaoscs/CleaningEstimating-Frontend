@@ -259,196 +259,245 @@ const QuoteForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4">
-      {/* Logo */}
-      <div className="flex justify-between items-center mb-4">
+    <div className="min-h-screen bg-custom-background p-5">
+      {/* Encabezado de la página */}
+      <header className="bg-custom-background p-4 rounded-md flex justify-between items-center mb-6">
         <img src={logo} alt="Logo" className="w-32 h-auto" />
-        <h1 className="text-2xl font-bold text-right">ESTIMATE CALCULATOR</h1>
-      </div>
-      <form
-        onSubmit={handleSubmit}
-        className="p-5 max-w-lg mx-auto bg-white shadow-md rounded-lg"
-      >
-        <h2 className="text-2xl font-bold mb-4" style={{ color: "#164e63" }}>
-          Contact Information
-        </h2>
+        <h1 className="text-2xl sm:text-3xl font-bold text-right">
+          ESTIMATE CALCULATOR
+        </h1>
+      </header>
 
-        {/* Customer Name */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className={`w-full p-2 mt-2 border rounded-md ${
-              errors.name ? "border-red-500" : ""
-            }`}
-            required
-          />
-          {errors.name && (
-            <p className="text-red-500 text-sm mt-2">{errors.name}</p>
-          )}
-        </div>
-
-        {/* Phone Number */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Phone:</label>
-          <input
-            type="text"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className={`w-full p-2 mt-2 border rounded-md ${
-              errors.contact ? "border-red-500" : ""
-            }`}
-          />
-        </div>
-
-        {/* Email */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Email:</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className={`w-full p-2 mt-2 border rounded-md ${
-              errors.contact ? "border-red-500" : ""
-            }`}
-          />
-          {errors.contact && (
-            <p className="text-red-500 text-sm mt-2">{errors.contact}</p>
-          )}
-        </div>
-        <h2 className="text-2xl font-bold mb-4" style={{ color: "#164e63" }}>
-          Tell Us About Your Home
-        </h2>
-        {/* House Size */}
-        <div className="mb-4">
-          <label className="block text-gray-700">House Size (sq ft):</label>
-          <input
-            type="text"
-            name="size"
-            value={formData.size}
-            onChange={handleChange}
-            className={`w-full p-2 mt-2 border rounded-md ${
-              errors.size ? "border-red-500" : ""
-            }`}
-            required
-          />
-          {showTooltip && (
-            <p className="text-red-500 text-sm mt-2">{errors.size}</p>
-          )}
-        </div>
-        <h2 className="text-2xl font-bold mb-4" style={{ color: "#164e63" }}>
-          What Type of Cleaning Would You Like?
-        </h2>
-        {/* Cleaning Type */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Cleaning Type:</label>
-          <select
-            name="cleaningType"
-            value={formData.cleaningType}
-            onChange={handleChange}
-            className="w-full p-2 mt-2 border rounded-md"
-          >
-            <option value="Regular">Regular</option>
-            <option value="Total">Total</option>
-            <option value="Deep">Deep</option>
-          </select>
-        </div>
-
-        {/* Frequency */}
-        {(formData.cleaningType === "Regular" ||
-          formData.cleaningType === "Total") && (
-          <div className="mb-4">
-            <label className="block text-gray-700">Frequency:</label>
-            <select
-              name="frequency"
-              value={formData.frequency}
-              onChange={handleChange}
-              className={`w-full p-2 mt-2 border rounded-md ${
-                errors.frequency ? "border-red-500" : ""
-              }`}
+      {/* Contenedor con responsive grid */}
+      <div className="p-5 max-w-4lg w-full mx-auto bg-white shadow-md rounded-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {/* Columna izquierda: Formulario */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <h2
+              className="text-2xl font-bold mb-4"
+              style={{ color: "#164e63" }}
             >
-              <option value="">Select frequency</option>
-              <option value="Weekly">Weekly</option>
-              <option value="Bi-weekly">Bi-weekly</option>
-              <option value="Monthly">Monthly</option>
-              <option value="One-time">One-time</option>
-            </select>
-            {errors.frequency && (
-              <p className="text-red-500 text-sm mt-2">{errors.frequency}</p>
-            )}
-          </div>
-        )}
+              Contact Information
+            </h2>
 
-        {/* Additional Services */}
-        {formData.cleaningType === "Regular" && (
-          <div className="mb-4">
-            <label className="block text-gray-700">Additional Services:</label>
-            <div>
+            {/* Otros controles del formulario */}
+            <div className="mb-4">
+              <label className="block text-gray-700">Name:</label>
               <input
-                type="checkbox"
-                name="cornersAndBaseboards"
-                checked={formData.additionalServices.cornersAndBaseboards}
+                type="text"
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
+                className={`w-full p-2 mt-2 border rounded-md ${
+                  errors.name ? "border-red-500" : ""
+                }`}
+                required
               />
-              <label className="ml-2">Dust corners and baseboards</label>
+              {errors.name && (
+                <p className="text-red-500 text-sm mt-2">{errors.name}</p>
+              )}
             </div>
-            <div>
+
+            {/* Phone Number */}
+            <div className="mb-4">
+              <label className="block text-gray-700">Phone:</label>
               <input
-                type="checkbox"
-                name="blinds"
-                checked={formData.additionalServices.blinds}
+                type="text"
+                name="phone"
+                value={formData.phone}
                 onChange={handleChange}
+                className={`w-full p-2 mt-2 border rounded-md ${
+                  errors.contact ? "border-red-500" : ""
+                }`}
               />
-              <label className="ml-2">Dust blinds</label>
             </div>
-            <div>
+
+            {/* Email */}
+            <div className="mb-4">
+              <label className="block text-gray-700">Email:</label>
               <input
-                type="checkbox"
-                name="fansAndFixtures"
-                checked={formData.additionalServices.fansAndFixtures}
+                type="email"
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
+                className={`w-full p-2 mt-2 border rounded-md ${
+                  errors.contact ? "border-red-500" : ""
+                }`}
               />
-              <label className="ml-2">
-                Dust ceiling fans and light fixtures
-              </label>
+              {errors.contact && (
+                <p className="text-red-500 text-sm mt-2">{errors.contact}</p>
+              )}
             </div>
-            <div>
+
+            <h2
+              className="text-xl sm:text-2xl font-bold mb-4"
+              style={{ color: "#164e63" }}
+            >
+              Tell Us About Your Home
+            </h2>
+
+            {/* House Size */}
+            <div className="mb-4">
+              <label className="block text-gray-700">House Size (sqft):</label>
               <input
-                type="checkbox"
-                name="switchPlates"
-                checked={formData.additionalServices.switchPlates}
+                type="text"
+                name="size"
+                value={formData.size}
                 onChange={handleChange}
+                className={`w-full p-2 mt-2 border rounded-md ${
+                  errors.size ? "border-red-500" : ""
+                }`}
+                required
               />
-              <label className="ml-2">
-                Clean switch plates, outlet plates, doors, and door knobs
-              </label>
+              {showTooltip && (
+                <p className="text-red-500 text-sm mt-2">{errors.size}</p>
+              )}
             </div>
-            <div>
-              <input
-                type="checkbox"
-                name="windows"
-                checked={formData.additionalServices.windows}
+
+            <h2
+              className="text-2xl font-bold mb-4"
+              style={{ color: "#164e63" }}
+            >
+              What Type of Cleaning Would You Like?
+            </h2>
+
+            {/* Frequency */}
+            {(formData.cleaningType === "Regular" ||
+              formData.cleaningType === "Total") && (
+              <div className="mb-4">
+                <label className="block text-gray-700">Frequency:</label>
+                <select
+                  name="frequency"
+                  value={formData.frequency}
+                  onChange={handleChange}
+                  className={`w-full p-2 mt-2 border rounded-md ${
+                    errors.frequency ? "border-red-500" : ""
+                  }`}
+                >
+                  <option value="">Select frequency</option>
+                  <option value="Weekly">Weekly</option>
+                  <option value="Bi-weekly">Bi-weekly</option>
+                  <option value="Monthly">Monthly</option>
+                  <option value="One-time">One-time</option>
+                </select>
+                {errors.frequency && (
+                  <p className="text-red-500 text-sm mt-2">
+                    {errors.frequency}
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* Cleaning Type */}
+            <div className="mb-4">
+              <label className="block text-gray-700">Cleaning Type:</label>
+              <select
+                name="cleaningType"
+                value={formData.cleaningType}
                 onChange={handleChange}
-              />
-              <label className="ml-2">
-                Clean interior windows & window sills
-              </label>
+                className="w-full p-2 mt-2 border rounded-md"
+              >
+                <option value="Regular">Regular</option>
+                <option value="Total">Total</option>
+                <option value="Deep">Deep</option>
+              </select>
             </div>
+
+            {/* Cleaning Description (solo para móvil) */}
+            <div className="p-4 border-l border-gray-200 sm:hidden">
+              <h2 className="text-lg font-medium text-gray-800">
+                Cleaning Description
+              </h2>
+              <p className="mt-2 text-sm text-gray-600">
+                Obtener descripción dinámica
+              </p>
+            </div>
+
+            {/* Additional Services */}
+            {formData.cleaningType === "Regular" && (
+              <div className="mb-4">
+                <label className="block text-gray-700">
+                  Additional Services:
+                </label>
+                <div>
+                  <input
+                    type="checkbox"
+                    name="cornersAndBaseboards"
+                    checked={formData.additionalServices.cornersAndBaseboards}
+                    onChange={handleChange}
+                    className="transform scale-125"
+                  />
+                  <label className="ml-2">Dust corners and baseboards</label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    name="blinds"
+                    checked={formData.additionalServices.blinds}
+                    onChange={handleChange}
+                    className="transform scale-125"
+                  />
+                  <label className="ml-2">Dust blinds</label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    name="fansAndFixtures"
+                    checked={formData.additionalServices.fansAndFixtures}
+                    onChange={handleChange}
+                    className="transform scale-125"
+                  />
+                  <label className="ml-2">
+                    Dust ceiling fans and light fixtures
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    name="switchPlates"
+                    checked={formData.additionalServices.switchPlates}
+                    onChange={handleChange}
+                    className="transform scale-125"
+                  />
+                  <label className="ml-2">
+                    Clean switch plates, outlet plates, doors, and door knobs
+                  </label>
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    name="windows"
+                    checked={formData.additionalServices.windows}
+                    onChange={handleChange}
+                    className="transform scale-125"
+                  />
+                  <label className="ml-2">
+                    Clean interior windows & window sills
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+            >
+              Get Estimate
+            </button>
+          </form>
+
+          {/* Columna derecha: Descripción dinámica del tipo de limpieza (solo en Desktop) */}
+          <div className="p-4 border-l border-gray-200 hidden sm:block">
+            <h2 className="text-lg font-medium text-gray-800">
+              Cleaning Description
+            </h2>
+            <p className="mt-2 text-sm text-gray-600">
+              Obtener descripción dinámica
+            </p>
           </div>
-        )}
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
-        >
-          Get Estimate
-        </button>
-      </form>
+        </div>
+      </div>
     </div>
   );
 };
