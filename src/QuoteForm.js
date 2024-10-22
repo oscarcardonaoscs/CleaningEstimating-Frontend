@@ -19,6 +19,51 @@ const QuoteForm = () => {
     },
   });
 
+  const cleaningDescriptions = {
+    Regular: [
+      "✨ Cleaning bathrooms (toilet, shower, sink, floor)",
+      "✨ Dusting all surfaces",
+      "✨ Cleaning the kitchen",
+      "✨ Vacuuming and mopping floors",
+      "✨ Emptying trash bins",
+    ],
+    Total: [
+      "✨ Cleaning bathrooms (toilet, shower, sink, floor)",
+      "✨ Dusting all surfaces",
+      "✨ Cleaning the kitchen",
+      "✨ Vacuuming and mopping floors",
+      "✨ Emptying trash bins",
+      "✨ Dusting corners, baseboards, blinds, ceiling fans, and window sills",
+      "✨ Cleaning switch plates, outlet plates, and door knobs",
+      "✨ Cleaning interior windows & window sills",
+    ],
+    Deep: [
+      "✨ Baseboards",
+      "✨ Trim work",
+      "✨ Interior windows & blinds",
+      "✨ Exterior cabinets & drawers",
+      "✨ Light Fixtures",
+      "✨ Doors",
+      "✨ Deep clean all surfaces",
+      "✨ Vacuum and & mop under all furniture",
+      "✨ Vacuum sofas - under cushions, and pillows",
+    ],
+  };
+
+  const cleaningTitles = {
+    Regular: "Regular Cleaning",
+    Total: "Total Cleaning",
+    Deep: "Deep Cleaning",
+  };
+
+  const cleaningObjectives = {
+    Regular:
+      "Designed to maintain your home in perfect condition through consistent, recurring cleanings, ensuring a fresh and welcoming environment.",
+    Total:
+      "We meticulously care for every corner of your home, including hard-to-reach areas, leaving it spotless. Ideal for a complete refresh or whenever you desire that total clean feeling!",
+    Deep: "A comprehensive one-time cleaning service that targets hard-to-reach places and thoroughly cleans the entire home, ensuring every inch shines.",
+  };
+
   const [errors, setErrors] = useState({
     size: "",
     frequency: "",
@@ -405,11 +450,24 @@ const QuoteForm = () => {
 
             {/* Cleaning Description (solo para móvil) */}
             <div className="p-4 border-l border-gray-200 sm:hidden">
-              <h2 className="text-lg font-medium text-gray-800">
-                Cleaning Description
-              </h2>
-              <p className="mt-2 text-sm text-gray-600">
-                Obtener descripción dinámica
+              <h3
+                className="text-xl sm:text-2xl font-bold mb-4"
+                style={{ color: "#155e75" }}
+              >
+                {cleaningTitles[formData.cleaningType]}
+              </h3>
+              <p className="text-gray-700 mb-2">
+                {cleaningObjectives[formData.cleaningType]}
+              </p>
+              <p className="text-gray-700">
+                {cleaningDescriptions[formData.cleaningType].map(
+                  (line, index) => (
+                    <span key={index}>
+                      {line}
+                      <br />
+                    </span>
+                  )
+                )}
               </p>
             </div>
 
@@ -489,11 +547,24 @@ const QuoteForm = () => {
 
           {/* Columna derecha: Descripción dinámica del tipo de limpieza (solo en Desktop) */}
           <div className="p-4 border-l border-gray-200 hidden sm:block">
-            <h2 className="text-lg font-medium text-gray-800">
-              Cleaning Description
-            </h2>
-            <p className="mt-2 text-sm text-gray-600">
-              Obtener descripción dinámica
+            <h3
+              className="text-xl sm:text-2xl font-bold mb-4"
+              style={{ color: "#155e75" }}
+            >
+              {cleaningTitles[formData.cleaningType]}
+            </h3>
+            <p className="text-gray-700 mb-2">
+              {cleaningObjectives[formData.cleaningType]}
+            </p>
+            <p className="text-gray-700">
+              {cleaningDescriptions[formData.cleaningType].map(
+                (line, index) => (
+                  <span key={index}>
+                    {line}
+                    <br />
+                  </span>
+                )
+              )}
             </p>
           </div>
         </div>
