@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import QuoteForm from "./QuoteForm";
 import EstimatePage from "./EstimatePage";
+import ConfirmationPage from "./ConfirmationPage";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <Routes>
           <Route path="/" element={<QuoteForm />} />
           <Route path="/estimate" element={<EstimatePage />} />
+          <Route path="/confirmation" element={<ConfirmationPage />} />
         </Routes>
       </Router>
     </div>
