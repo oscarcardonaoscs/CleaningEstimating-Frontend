@@ -135,7 +135,7 @@ const QuoteForm = () => {
 
     let hasErrors = false;
 
-    // Validate name
+    // Validación del nombre
     if (!formData.name) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -146,7 +146,7 @@ const QuoteForm = () => {
       setErrors((prevErrors) => ({ ...prevErrors, name: "" }));
     }
 
-    // Validate contact (phone or email)
+    // Validación de contacto (teléfono o correo)
     if (!formData.phone && !formData.email) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -157,7 +157,7 @@ const QuoteForm = () => {
       setErrors((prevErrors) => ({ ...prevErrors, contact: "" }));
     }
 
-    // Validate house size
+    // Validación del tamaño de la casa
     if (!formData.size) {
       setErrors((prevErrors) => ({
         ...prevErrors,
@@ -175,7 +175,7 @@ const QuoteForm = () => {
       setShowTooltip(false);
     }
 
-    // Validate frequency for Regular and Total cleaning
+    // Validación de frecuencia para limpiezas Regular y Total
     if (
       (formData.cleaningType === "Regular" ||
         formData.cleaningType === "Total") &&
@@ -188,119 +188,56 @@ const QuoteForm = () => {
       hasErrors = true;
     }
 
-    // If no errors, calculate the estimate
+    // Si no hay errores, realiza la solicitud al backend
     if (!hasErrors) {
-      const estimate = calculateEstimate(
-        formData.size,
-        formData.cleaningType,
-        formData.frequency,
-        formData.additionalServices
-      );
-
-      // Redirect to the estimate page with the form data
-      navigate("/estimate", {
-        state: {
-          estimate,
-          formData,
-          additionalServices: formData.additionalServices,
+      // Realiza la solicitud POST al backend
+      fetch("http://localhost:8000/calculate-estimate/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      });
+        body: JSON.stringify({
+          size_sqft: formData.size,
+          cleaning_type: formData.cleaningType,
+          frequency: formData.frequency,
+          additional_services: formData.additionalServices,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Redirige a la página de estimado con el resultado del backend
+          navigate("/estimate", {
+            state: {
+              estimate: data.estimate,
+              formData,
+              additionalServices: formData.additionalServices,
+            },
+          });
 
-      // Optionally reset form data
-      setFormData({
-        size: "",
-        cleaningType: "Regular",
-        frequency: "",
-        name: "",
-        phone: "",
-        email: "",
-        additionalServices: {
-          cornersAndBaseboards: false,
-          blinds: false,
-          fansAndFixtures: false,
-          switchPlates: false,
-          windows: false,
-        },
-      });
+          // Opcionalmente, resetea el formulario
+          setFormData({
+            size: "",
+            cleaningType: "Regular",
+            frequency: "",
+            name: "",
+            phone: "",
+            email: "",
+            additionalServices: {
+              cornersAndBaseboards: false,
+              blinds: false,
+              fansAndFixtures: false,
+              switchPlates: false,
+              windows: false,
+            },
+          });
+        })
+        .catch((error) => {
+          console.error("Error calculating estimate:", error);
+        });
     }
-    // Log form data (for debugging purposes)
+
+    // Log de formData (para depuración)
     console.log(formData);
-  };
-
-  // Function to calculate the estimate
-  const calculateEstimate = (
-    size,
-    cleaningType,
-    frequency,
-    additionalServices
-  ) => {
-    const sqft = Number(size);
-    let factor = 0;
-    let factorTotal = 0;
-
-    if (cleaningType === "Regular") {
-      switch (frequency) {
-        case "Weekly":
-          factor = 0.03;
-          break;
-        case "Bi-weekly":
-          factor = 0.04;
-          break;
-        case "Monthly":
-          factor = 0.05;
-          break;
-        case "One-time":
-          factor = 0.06;
-          break;
-        default:
-          break;
-      }
-      factorTotal = factor + 0.02;
-    } else if (cleaningType === "Total") {
-      switch (frequency) {
-        case "Weekly":
-          factor = 0.05;
-          break;
-        case "Bi-weekly":
-          factor = 0.06;
-          break;
-        case "Monthly":
-          factor = 0.07;
-          break;
-        case "One-time":
-          factor = 0.08;
-          break;
-        default:
-          break;
-      }
-    } else if (cleaningType === "Deep") {
-      factor = 0.2;
-    }
-
-    let estimate = sqft * factor;
-    console.log("Regular estimate: " + estimate);
-    console.log("Total estimate: " + sqft * factorTotal);
-    if (cleaningType === "Regular") {
-      if (additionalServices.cornersAndBaseboards) {
-        estimate += (sqft * factorTotal - sqft * factor) * 0.2;
-      }
-      if (additionalServices.blinds) {
-        estimate += (sqft * factorTotal - sqft * factor) * 0.25;
-      }
-      if (additionalServices.fansAndFixtures) {
-        estimate += (sqft * factorTotal - sqft * factor) * 0.1;
-      }
-      if (additionalServices.switchPlates) {
-        estimate += (sqft * factorTotal - sqft * factor) * 0.2;
-      }
-      if (additionalServices.windows) {
-        estimate += (sqft * factorTotal - sqft * factor) * 0.25;
-      }
-    }
-
-    console.log("Final estimate: " + estimate);
-
-    return estimate;
   };
 
   return (
@@ -309,7 +246,7 @@ const QuoteForm = () => {
       <header className="bg-custom-background p-4 rounded-md flex justify-between items-center mb-6">
         <img src={logo} alt="Logo" className="w-32 h-auto" />
         <h1 className="text-2xl sm:text-3xl font-bold text-right">
-          ESTIMATE CALCULATOR
+          Cleaning Quote Calculator
         </h1>
       </header>
 
