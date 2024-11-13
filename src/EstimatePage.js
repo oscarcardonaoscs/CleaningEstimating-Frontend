@@ -51,15 +51,24 @@ const EstimatePage = () => {
     setLoading(true);
     try {
       // Aquí enviarás la información de addressData al backend para generar el correo
-      await fetch("http://localhost:8000/send-booking-email", {
+      await fetch("http://localhost:8000/schedule-booking/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          formData,
-          addressData,
-          estimate,
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          house_size: formData.size,
+          cleaning_type: formData.cleaningType,
+          frequency: formData.frequency,
+          additional_services: additionalServices,
+          estimate: estimate,
+          address1: addressData.address1,
+          address2: addressData.address2,
+          city: addressData.city,
+          postal_zip: addressData.zip,
         }),
       });
 
