@@ -90,6 +90,20 @@ const QuoteForm = () => {
       }
     }
 
+    // Validación para el teléfono
+    if (name === "phone") {
+      const phoneRegex = /^[\d\s-]{10,15}$/; // Acepta números, espacios y guiones entre 10 y 15 caracteres
+      if (!phoneRegex.test(value.replace(/[-\s]/g, ""))) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          phone:
+            "Phone number must be 10 digits, optionally with spaces or dashes",
+        }));
+      } else {
+        setErrors((prevErrors) => ({ ...prevErrors, phone: "" }));
+      }
+    }
+
     // Validation for frequency
     if (name === "frequency") {
       if (value === "") {
@@ -146,15 +160,49 @@ const QuoteForm = () => {
       setErrors((prevErrors) => ({ ...prevErrors, name: "" }));
     }
 
-    // Validación de contacto (teléfono o correo)
-    if (!formData.phone && !formData.email) {
+    // Validación del teléfono
+    const phoneRegex = /^[0-9]{10}$|^[0-9]{3}[- ]?[0-9]{3}[- ]?[0-9]{4}$/;
+    const isPhoneValid = formData.phone && phoneRegex.test(formData.phone);
+
+    if (formData.phone && !isPhoneValid) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        contact: "Phone or Email is required",
+        phone:
+          "Phone number must be 10 digits, optionally with spaces or dashes",
       }));
       hasErrors = true;
     } else {
-      setErrors((prevErrors) => ({ ...prevErrors, contact: "" }));
+      setErrors((prevErrors) => ({ ...prevErrors, phone: "" }));
+    }
+
+    // Validación del correo electrónico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isEmailValid = formData.email && emailRegex.test(formData.email);
+
+    if (formData.email && !isEmailValid) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "Invalid email format",
+      }));
+      hasErrors = true;
+    } else {
+      setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
+    }
+
+    // Verificación: al menos uno debe ser válido
+    if (!isPhoneValid && !isEmailValid) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        phone: "At least one contact method is required",
+        email: "At least one contact method is required",
+      }));
+      hasErrors = true;
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        phone: isPhoneValid ? "" : prevErrors.phone,
+        email: isEmailValid ? "" : prevErrors.email,
+      }));
     }
 
     // Validación del tamaño de la casa
@@ -191,7 +239,7 @@ const QuoteForm = () => {
     // Si no hay errores, realiza la solicitud al backend
     if (!hasErrors) {
       // Realiza la solicitud POST al backend
-      fetch("http://localhost:8000/calculate-estimate/", {
+      fetch("http://18.117.130.47:8000/calculate-estimate/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -289,9 +337,12 @@ const QuoteForm = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 className={`w-full p-2 mt-2 border rounded-md ${
-                  errors.contact ? "border-red-500" : ""
+                  errors.phone ? "border-red-500" : ""
                 }`}
               />
+              {errors.phone && (
+                <p className="text-red-500 text-sm mt-2">{errors.phone}</p>
+              )}
             </div>
 
             {/* Email */}
