@@ -51,7 +51,7 @@ const EstimatePage = () => {
     setLoading(true);
     try {
       // Aquí enviarás la información de addressData al backend para generar el correo
-      await fetch("http://18.117.130.47:8000/schedule-booking/", {
+      await fetch("https://18.117.130.47:8000/schedule-booking/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

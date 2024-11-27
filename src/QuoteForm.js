@@ -239,7 +239,7 @@ const QuoteForm = () => {
     // Si no hay errores, realiza la solicitud al backend
     if (!hasErrors) {
       // Realiza la solicitud POST al backend
-      fetch("http://18.117.130.47:8000/calculate-estimate/", {
+      fetch("https://18.117.130.47:8000/calculate-estimate/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
