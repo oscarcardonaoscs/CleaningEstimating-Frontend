@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import QuoteForm from "./QuoteForm";
 import EstimatePage from "./EstimatePage";
 import ConfirmationPage from "./ConfirmationPage";
+import ChineloPage from "./ChineloPage";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           <Route path="/" element={<QuoteForm />} />
           <Route path="/estimate" element={<EstimatePage />} />
           <Route path="/confirmation" element={<ConfirmationPage />} />
+          <Route path="/chinelo" element={<ChineloPage />} />
         </Routes>
       </Router>
     </div>
