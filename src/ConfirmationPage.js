@@ -1,15 +1,14 @@
-import React from "react";
-import logo from "./Logo_MCJ.png";
-
 const ConfirmationPage = () => {
   return (
-    <div className="min-h-screen bg-custom-background flex flex-col items-center justify-center p-5">
-      {/* Encabezado fuera del cuadro blanco */}
-      <div className="flex items-center justify-start mb-6">
-        <img src={logo} alt="Logo" className="w-32 h-auto" />
-      </div>
+    <div className="min-h-screen bg-custom-background p-5">
+      <header className="bg-custom-background p-1 rounded-md flex justify-between items-center mb-4">
+        <h1 className="text-2xl sm:text-3xl font-bold">
+          Cleaning Quote Calculator
+        </h1>
+      </header>
 
-      {/* Cuadro blanco con el mensaje de confirmación */}
+      {/* Contenedor principal con flex-grow para empujar el footer hacia abajo cuando sea necesario */}
+
       <div className="max-w-lg w-full bg-white shadow-md rounded-lg p-8 text-center">
         <h2 className="text-2xl font-bold mb-4" style={{ color: "#164e63" }}>
           Thank you for your Booking request!

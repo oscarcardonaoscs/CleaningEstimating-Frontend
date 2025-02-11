@@ -133,22 +133,6 @@ const ChineloPage = () => {
           </p>
         </section>
       </main>
-
-      {/* Footer */}
-      <footer
-        style={{
-          backgroundColor: "#004d40",
-          color: "white",
-          textAlign: "center",
-          padding: "1rem",
-        }}
-        className="text-sm sm:text-base lg:text-lg"
-      >
-        <p>
-          &copy; {new Date().getFullYear()} MCJ’s Cleaning Service. All rights
-          reserved.
-        </p>
-      </footer>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import logo from "./Logo_MCJ.png";
+import BASE_URL from "./config.js";
 
 const QuoteForm = () => {
   const [formData, setFormData] = useState({
@@ -60,8 +60,8 @@ const QuoteForm = () => {
     Regular:
       "Designed to maintain your home in perfect condition through consistent, recurring cleanings, ensuring a fresh and welcoming environment.",
     Total:
-      "We meticulously care for every corner of your home, including hard-to-reach areas, leaving it spotless. Ideal for a complete refresh or whenever you desire that total clean feeling!",
-    Deep: "A comprehensive one-time cleaning service that targets hard-to-reach places and thoroughly cleans the entire home, ensuring every inch shines.",
+      "We meticulously care for every corner of your home, leaving it spotless.",
+    Deep: "A comprehensive one-time cleaning service that targets hard-to-reach places and thoroughly cleans the entire home.",
   };
 
   const [errors, setErrors] = useState({
@@ -223,40 +223,28 @@ const QuoteForm = () => {
       setShowTooltip(false);
     }
 
-    // Validación de frecuencia para limpiezas Regular y Total
-    if (
-      (formData.cleaningType === "Regular" ||
-        formData.cleaningType === "Total") &&
-      !formData.frequency
-    ) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        frequency: "Frequency is required for Regular and Total cleaning",
-      }));
-      hasErrors = true;
-    }
-
     // Si no hay errores, realiza la solicitud al backend
     if (!hasErrors) {
       // Realiza la solicitud POST al backend
-      fetch("https://api.mcjscleaningservice.com/calculate-estimate/", {
+
+      fetch(`${BASE_URL}/calculate-estimate-tab/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          size_sqft: formData.size,
+          house_size: formData.size, // Cambiado de size_sqft a house_size
           cleaning_type: formData.cleaningType,
           frequency: formData.frequency,
-          additional_services: formData.additionalServices,
         }),
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log(data);
           // Redirige a la página de estimado con el resultado del backend
           navigate("/estimate", {
             state: {
-              estimate: data.estimate,
+              estimate: data,
               formData,
               additionalServices: formData.additionalServices,
             },
@@ -291,9 +279,8 @@ const QuoteForm = () => {
   return (
     <div className="min-h-screen bg-custom-background p-5">
       {/* Encabezado de la página */}
-      <header className="bg-custom-background p-4 rounded-md flex justify-between items-center mb-6">
-        <img src={logo} alt="Logo" className="w-32 h-auto" />
-        <h1 className="text-2xl sm:text-3xl font-bold text-right">
+      <header className="bg-custom-background p-1 rounded-md flex justify-between items-center mb-4">
+        <h1 className="text-2xl sm:text-3xl font-bold">
           Cleaning Quote Calculator
         </h1>
       </header>
@@ -309,7 +296,6 @@ const QuoteForm = () => {
             >
               Contact Information
             </h2>
-
             {/* Otros controles del formulario */}
             <div className="mb-4">
               <label className="block text-gray-700">Name:</label>
@@ -327,7 +313,6 @@ const QuoteForm = () => {
                 <p className="text-red-500 text-sm mt-2">{errors.name}</p>
               )}
             </div>
-
             {/* Phone Number */}
             <div className="mb-4">
               <label className="block text-gray-700">Phone:</label>
@@ -344,7 +329,6 @@ const QuoteForm = () => {
                 <p className="text-red-500 text-sm mt-2">{errors.phone}</p>
               )}
             </div>
-
             {/* Email */}
             <div className="mb-4">
               <label className="block text-gray-700">Email:</label>
@@ -361,14 +345,12 @@ const QuoteForm = () => {
                 <p className="text-red-500 text-sm mt-2">{errors.contact}</p>
               )}
             </div>
-
             <h2
               className="text-xl sm:text-2xl font-bold mb-4"
               style={{ color: "#164e63" }}
             >
               Tell Us About Your Home
             </h2>
-
             {/* House Size */}
             <div className="mb-4">
               <label className="block text-gray-700">House Size (sqft):</label>
@@ -386,7 +368,6 @@ const QuoteForm = () => {
                 <p className="text-red-500 text-sm mt-2">{errors.size}</p>
               )}
             </div>
-
             <h2
               className="text-2xl font-bold mb-4"
               style={{ color: "#164e63" }}
@@ -394,7 +375,7 @@ const QuoteForm = () => {
               What Type of Cleaning Would You Like?
             </h2>
 
-            {/* Frequency */}
+            {/* Frequency 
             {(formData.cleaningType === "Regular" ||
               formData.cleaningType === "Total") && (
               <div className="mb-4">
@@ -419,8 +400,7 @@ const QuoteForm = () => {
                   </p>
                 )}
               </div>
-            )}
-
+            )}*/}
             {/* Cleaning Type */}
             <div className="mb-4">
               <label className="block text-gray-700">Cleaning Type:</label>
@@ -435,7 +415,6 @@ const QuoteForm = () => {
                 <option value="Deep">Deep</option>
               </select>
             </div>
-
             {/* Cleaning Description (solo para móvil) */}
             <div className="p-4 border-l border-gray-200 sm:hidden">
               <h3
@@ -444,8 +423,8 @@ const QuoteForm = () => {
               >
                 {cleaningTitles[formData.cleaningType]}
               </h3>
-              <p className="text-gray-700 mb-2">
-                {cleaningObjectives[formData.cleaningType]}
+              <p className="text-gray-700 mb-2 text-justify">
+                <em>{cleaningObjectives[formData.cleaningType]}</em>
               </p>
               <p className="text-gray-700">
                 {cleaningDescriptions[formData.cleaningType].map(
@@ -458,8 +437,7 @@ const QuoteForm = () => {
                 )}
               </p>
             </div>
-
-            {/* Additional Services */}
+            {/* Additional Services 
             {formData.cleaningType === "Regular" && (
               <div className="mb-4">
                 <label className="block text-gray-700">
@@ -522,7 +500,7 @@ const QuoteForm = () => {
                   </label>
                 </div>
               </div>
-            )}
+            )}*/}
 
             {/* Submit Button */}
             <button
