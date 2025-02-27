@@ -2,3 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+.text-description {
+    color: #4c5253;
+    font-size: 1.125rem; /* text-lg en Tailwind */
+  }
+
+  html, body {
+   overflow-x: hidden;
+    height: 100%;
+  }
+  

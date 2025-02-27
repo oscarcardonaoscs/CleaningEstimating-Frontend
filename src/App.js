@@ -3,25 +3,40 @@ import QuoteForm from "./QuoteForm";
 import EstimatePage from "./EstimatePage";
 import ConfirmationPage from "./ConfirmationPage";
 import ChineloPage from "./ChineloPage";
-import Header from "./Header";
+
 import Footer from "./Footer";
 
+import Home from "./pages/website/Home";
+import Navbar from "./pages/website/components/Navbar";
+
+import React, { useEffect } from "react";
+import ReactGA from "react-ga4";
+
+ReactGA.initialize("G-1LB29362HR");
+
 function App() {
+  useEffect(() => {
+    ReactGA.send("pageview");
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#E3FEFF] flex flex-col">
-      <Header />
-      <div className="flex-grow flex">
-        <Router>
+    <Router>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+
+        <div className="flex-grow overflow-hidden">
           <Routes>
-            <Route path="/" element={<QuoteForm />} />
+            <Route path="/" element={<Home />} />
+
+            <Route path="/estimating" element={<QuoteForm />} />
             <Route path="/estimate" element={<EstimatePage />} />
             <Route path="/confirmation" element={<ConfirmationPage />} />
             <Route path="/chinelo" element={<ChineloPage />} />
           </Routes>
-        </Router>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </Router>
   );
 }
 
