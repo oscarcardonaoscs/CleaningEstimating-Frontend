@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import BASE_URL from "../../../../config.js";
 
 export default function ContactSection() {
   const recaptchaRef = useRef();
@@ -24,7 +25,7 @@ export default function ContactSection() {
 
     try {
       // Enviar los datos al backend
-      const response = await fetch("http://localhost:8000/send_email_endpoint/", {
+      const response = await fetch(`${BASE_URL}/send_email_endpoint/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
