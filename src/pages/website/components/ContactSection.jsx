@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import BASE_URL from "../../../../config.js";
+import BASE_URL from "../../../config.js"
 
 export default function ContactSection() {
   const recaptchaRef = useRef();
