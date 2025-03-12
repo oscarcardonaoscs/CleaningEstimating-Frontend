@@ -7,6 +7,7 @@ import ChineloPage from "./ChineloPage";
 import Footer from "./Footer";
 
 import Home from "./pages/website/Home";
+import ServiceCarousel from "./pages/website/ServiceCarousel";
 import Navbar from "./pages/website/components/Navbar";
 
 import React, { useEffect } from "react";
@@ -27,7 +28,7 @@ function App() {
         <div className="flex-grow overflow-hidden">
           <Routes>
             <Route path="/" element={<Home />} />
-
+            <Route path="/carrusel" element={<ServiceCarousel />} />
             <Route path="/estimating" element={<QuoteForm />} />
             <Route path="/estimate" element={<EstimatePage />} />
             <Route path="/confirmation" element={<ConfirmationPage />} />
