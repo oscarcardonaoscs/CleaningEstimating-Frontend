@@ -9,7 +9,7 @@ def generate_referral_image(template_path, output_path, referral_code):
 
     # Definir la fuente y tamaño del texto (ajusta según tu plantilla)
     # Asegúrate de que esta fuente esté disponible o usa una alternativa
-    font_path = "arial.ttf"
+    font_path = "C:/Windows/Fonts/Arialbd.ttf"
     font_size = 40
     font = ImageFont.truetype(font_path, font_size)
 
