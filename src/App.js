@@ -5,6 +5,7 @@ import ConfirmationPage from "./ConfirmationPage";
 import ChineloPage from "./ChineloPage";
 
 import Footer from "./Footer";
+import PrivacyPolicy from "./pages/website/components/PrivacyPolicy";
 
 import Home from "./pages/website/Home";
 import ServiceCarousel from "./pages/website/ServiceCarousel";
@@ -33,6 +34,7 @@ function App() {
             <Route path="/estimate" element={<EstimatePage />} />
             <Route path="/confirmation" element={<ConfirmationPage />} />
             <Route path="/chinelo" element={<ChineloPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           </Routes>
         </div>
         <Footer />

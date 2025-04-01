@@ -1,20 +1,30 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from "../../../Logo_MCJ_transparent.png";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation(); // Obtiene la ruta actual
 
   const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    const scroll = () => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+      setIsMenuOpen(false); // Cierra el menú después de hacer clic
+    };
+
+    if (location.pathname !== "/") {
+      navigate("/"); // Regresa a la página principal
+      setTimeout(scroll, 300); // Espera un poco antes de hacer scroll
+    } else {
+      scroll();
     }
-    setIsMenuOpen(false); // Cierra el menú después de hacer clic en un enlace
   };
 
-  // Deshabilita el scroll cuando el menú está abierto
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -37,42 +47,71 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center px-4 w-full">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
-          <img src={logo} alt="MCJ's Cleaning Service Logo" className="w-24 h-24 object-contain" />
+          <img
+            src={logo}
+            alt="MCJ's Cleaning Service Logo"
+            className="w-24 h-24 object-contain"
+          />
         </Link>
 
         {/* Menú para desktop */}
         <div className="hidden md:flex space-x-6">
-          <button onClick={() => scrollToSection("about")} className="hover:text-yellow-400">About</button>
-          <button onClick={() => scrollToSection("serving")} className="hover:text-yellow-400">Serving Areas</button>
-          <button onClick={() => scrollToSection("services")} className="hover:text-yellow-400">Our Services</button>
-          <button onClick={() => scrollToSection("contact")} className="hover:text-yellow-400">Contact Us</button>
+          <button
+            onClick={() => scrollToSection("about")}
+            className="hover:text-yellow-400"
+          >
+            About
+          </button>
+          <button
+            onClick={() => scrollToSection("serving")}
+            className="hover:text-yellow-400"
+          >
+            Serving Areas
+          </button>
+          <button
+            onClick={() => scrollToSection("services")}
+            className="hover:text-yellow-400"
+          >
+            Our Services
+          </button>
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="hover:text-yellow-400"
+          >
+            Contact Us
+          </button>
         </div>
 
         {/* Call to Action */}
-        <Link to="/estimating" className="bg-yellow-400 text-blue-900 px-4 py-2 rounded-md font-semibold hover:bg-yellow-500">
+        <Link
+          to="/estimating"
+          className="bg-yellow-400 text-blue-900 px-4 py-2 rounded-md font-semibold hover:bg-yellow-500"
+        >
           Get a Free Estimate
         </Link>
 
         {/* Menú móvil (ícono de hamburguesa) */}
         <div className="md:hidden flex items-center">
-          <button onClick={() => setIsMenuOpen(true)} className="text-black focus:outline-none">
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="text-black focus:outline-none"
+          >
             <FaBars size={24} />
           </button>
         </div>
       </div>
 
-      {/* 🔹 Fondo bloqueador (evita interacción con la página) */}
+      {/* 🔹 Fondo bloqueador */}
       {isMenuOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40"
-          onClick={() => setIsMenuOpen(false)} // Cierra al tocar fuera del menú
+          onClick={() => setIsMenuOpen(false)}
         />
       )}
 
-      {/* 🔹 Menú móvil deslizante (✅ Solo se renderiza cuando isMenuOpen es true) */}
+      {/* 🔹 Menú móvil deslizante */}
       {isMenuOpen && (
         <div className="absolute top-20 left-0 right-0 bg-gray-900 text-white flex flex-col items-center py-4 z-50">
-          {/* Botón de cierre */}
           <button
             onClick={() => setIsMenuOpen(false)}
             className="absolute top-2 right-4 text-white text-2xl"
@@ -80,17 +119,28 @@ const Navbar = () => {
             <FaTimes />
           </button>
 
-          {/* Opciones de navegación */}
-          <button onClick={() => scrollToSection("about")} className="py-3 w-full text-center hover:text-yellow-400 border-b border-gray-600">
+          <button
+            onClick={() => scrollToSection("about")}
+            className="py-3 w-full text-center hover:text-yellow-400 border-b border-gray-600"
+          >
             ABOUT
           </button>
-          <button onClick={() => scrollToSection("serving")} className="py-3 w-full text-center hover:text-yellow-400 border-b border-gray-600">
+          <button
+            onClick={() => scrollToSection("serving")}
+            className="py-3 w-full text-center hover:text-yellow-400 border-b border-gray-600"
+          >
             SERVING AREAS
           </button>
-          <button onClick={() => scrollToSection("services")} className="py-3 w-full text-center hover:text-yellow-400 border-b border-gray-600">
+          <button
+            onClick={() => scrollToSection("services")}
+            className="py-3 w-full text-center hover:text-yellow-400 border-b border-gray-600"
+          >
             OUR SERVICES
           </button>
-          <button onClick={() => scrollToSection("contact")} className="py-3 w-full text-center hover:text-yellow-400">
+          <button
+            onClick={() => scrollToSection("contact")}
+            className="py-3 w-full text-center hover:text-yellow-400"
+          >
             CONTACT US
           </button>
         </div>

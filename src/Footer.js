@@ -1,4 +1,5 @@
 import { FaFacebook } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -17,7 +18,15 @@ function Footer() {
           <FaFacebook size={24} />
         </a>
       </div>
-      <div className="w-1/3"></div>
+
+      <div className="w-1/3 flex justify-end">
+        <Link
+          to="/privacy-policy"
+          className="text-sm text-white hover:underline"
+        >
+          Privacy Policy
+        </Link>
+      </div>
     </footer>
   );
 }

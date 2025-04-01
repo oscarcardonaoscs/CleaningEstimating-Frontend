@@ -170,9 +170,9 @@ const ServiceCarousel = () => {
       transitionTime={800}
       showStatus={false}
     >
-      <ServiceSlide services={regularServices} title="Regular Cleaning" />
-      <ServiceSlide services={totalServices} title="Total Cleaning" />
-      <ServiceSlide services={deepServices} title="Deep Cleaning" />
+      <ServiceSlide services={regularServices} title="REGULAR Cleaning" />
+      <ServiceSlide services={totalServices} title="TOTAL Cleaning" />
+      <ServiceSlide services={deepServices} title="DEEP Cleaning" />
     </Carousel>
   );
 };
