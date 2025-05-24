@@ -5,6 +5,28 @@ import ServingAreas from "../website/components/ServingAreas";
 import CleaningServices from "../website/components/CleaningServices";
 import SatisfactionGuarantee from "../website/components/SatisfactionGuarantee";
 import ContactSection from "../website/components/ContactSection";
+import { motion } from "framer-motion";
+
+// Animación base para secciones al hacer scroll
+const fadeUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const fadeDown = {
+  hidden: { opacity: 0, y: -50 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: -50 },
+  visible: { opacity: 1, x: 0 },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 50 },
+  visible: { opacity: 1, x: 0 },
+};
 
 export default function Home() {
   return (
@@ -30,20 +52,69 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <title>MCJ's Cleaning Service</title>
       </Helmet>
-      <HeroSection />
-      <div id="about">
+
+      <motion.div
+        variants={fadeDown}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 1 }}
+      >
+        <HeroSection />
+      </motion.div>
+
+      <motion.div
+        id="about"
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.8 }}
+      >
         <AboutUs />
-      </div>
-      <div id="serving">
+      </motion.div>
+      <motion.div
+        id="serving"
+        variants={fadeRight}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.8, delay: 0.1 }}
+      >
         <ServingAreas />
-      </div>
-      <div id="services">
+      </motion.div>
+
+      <motion.div
+        id="services"
+        variants={fadeLeft}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
         <CleaningServices />
-      </div>
-      <SatisfactionGuarantee />
-      <div id="contact">
+      </motion.div>
+
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+      >
+        <SatisfactionGuarantee />
+      </motion.div>
+
+      <motion.div
+        id="contact"
+        variants={fadeRight}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+      >
         <ContactSection />
-      </div>
+      </motion.div>
     </div>
   );
 }
