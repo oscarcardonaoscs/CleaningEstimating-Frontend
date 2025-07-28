@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate, useLocation } from "react-router-dom";
 import BASE_URL from "./config.js";
 
@@ -277,105 +278,125 @@ const QuoteForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-custom-background p-5">
-      {/* Encabezado de la página */}
-      <header className="bg-custom-background p-1 rounded-md flex justify-between items-center mb-4">
-        <h1 className="text-2xl sm:text-3xl font-bold">
-          Cleaning Quote Calculator
-        </h1>
-      </header>
+    <>
+      <Helmet>
+        <title>
+          Free Cleaning Estimate | Online House Cleaning Quote Huntsville, AL
+        </title>
+        <meta
+          name="description"
+          content="Get a fast and free estimate for house cleaning services in Huntsville and Madison, Alabama. Choose your cleaning type and house size — MCJ's Cleaning delivers satisfaction every time!"
+        />
+        <meta
+          name="keywords"
+          content="cleaning estimate Huntsville, house cleaning Madison AL, maid service quote, free cleaning estimate Alabama, online cleaning quote Huntsville, Madison cleaning services"
+        />
+        <link
+          rel="canonical"
+          href="https://mcjscleaningservice.com/estimating"
+        />
+      </Helmet>
+      <div className="min-h-screen bg-custom-background p-5">
+        {/* Encabezado de la página */}
+        <header className="bg-custom-background p-1 rounded-md flex justify-between items-center mb-4">
+          <h1 className="text-2xl sm:text-3xl font-bold">
+            Cleaning Quote Calculator
+          </h1>
+        </header>
 
-      {/* Contenedor con responsive grid */}
-      <div className="p-5 max-w-4lg w-full mx-auto bg-white shadow-md rounded-lg">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {/* Columna izquierda: Formulario */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <h2
-              className="text-2xl font-bold mb-4"
-              style={{ color: "#164e63" }}
-            >
-              Contact Information
-            </h2>
-            {/* Otros controles del formulario */}
-            <div className="mb-4">
-              <label className="block text-gray-700">Name:</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className={`w-full p-2 mt-2 border rounded-md ${
-                  errors.name ? "border-red-500" : ""
-                }`}
-                required
-              />
-              {errors.name && (
-                <p className="text-red-500 text-sm mt-2">{errors.name}</p>
-              )}
-            </div>
-            {/* Phone Number */}
-            <div className="mb-4">
-              <label className="block text-gray-700">Phone:</label>
-              <input
-                type="text"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className={`w-full p-2 mt-2 border rounded-md ${
-                  errors.phone ? "border-red-500" : ""
-                }`}
-              />
-              {errors.phone && (
-                <p className="text-red-500 text-sm mt-2">{errors.phone}</p>
-              )}
-            </div>
-            {/* Email */}
-            <div className="mb-4">
-              <label className="block text-gray-700">Email:</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className={`w-full p-2 mt-2 border rounded-md ${
-                  errors.contact ? "border-red-500" : ""
-                }`}
-              />
-              {errors.contact && (
-                <p className="text-red-500 text-sm mt-2">{errors.contact}</p>
-              )}
-            </div>
-            <h2
-              className="text-xl sm:text-2xl font-bold mb-4"
-              style={{ color: "#164e63" }}
-            >
-              Tell Us About Your Home
-            </h2>
-            {/* House Size */}
-            <div className="mb-4">
-              <label className="block text-gray-700">House Size (sqft):</label>
-              <input
-                type="text"
-                name="size"
-                value={formData.size}
-                onChange={handleChange}
-                className={`w-full p-2 mt-2 border rounded-md ${
-                  errors.size ? "border-red-500" : ""
-                }`}
-                required
-              />
-              {showTooltip && (
-                <p className="text-red-500 text-sm mt-2">{errors.size}</p>
-              )}
-            </div>
-            <h2
-              className="text-2xl font-bold mb-4"
-              style={{ color: "#164e63" }}
-            >
-              What Type of Cleaning Would You Like?
-            </h2>
+        {/* Contenedor con responsive grid */}
+        <div className="p-5 max-w-4lg w-full mx-auto bg-white shadow-md rounded-lg">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {/* Columna izquierda: Formulario */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <h2
+                className="text-2xl font-bold mb-4"
+                style={{ color: "#164e63" }}
+              >
+                Contact Information
+              </h2>
+              {/* Otros controles del formulario */}
+              <div className="mb-4">
+                <label className="block text-gray-700">Name:</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={`w-full p-2 mt-2 border rounded-md ${
+                    errors.name ? "border-red-500" : ""
+                  }`}
+                  required
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-2">{errors.name}</p>
+                )}
+              </div>
+              {/* Phone Number */}
+              <div className="mb-4">
+                <label className="block text-gray-700">Phone:</label>
+                <input
+                  type="text"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className={`w-full p-2 mt-2 border rounded-md ${
+                    errors.phone ? "border-red-500" : ""
+                  }`}
+                />
+                {errors.phone && (
+                  <p className="text-red-500 text-sm mt-2">{errors.phone}</p>
+                )}
+              </div>
+              {/* Email */}
+              <div className="mb-4">
+                <label className="block text-gray-700">Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`w-full p-2 mt-2 border rounded-md ${
+                    errors.contact ? "border-red-500" : ""
+                  }`}
+                />
+                {errors.contact && (
+                  <p className="text-red-500 text-sm mt-2">{errors.contact}</p>
+                )}
+              </div>
+              <h2
+                className="text-xl sm:text-2xl font-bold mb-4"
+                style={{ color: "#164e63" }}
+              >
+                Tell Us About Your Home
+              </h2>
+              {/* House Size */}
+              <div className="mb-4">
+                <label className="block text-gray-700">
+                  House Size (sqft):
+                </label>
+                <input
+                  type="text"
+                  name="size"
+                  value={formData.size}
+                  onChange={handleChange}
+                  className={`w-full p-2 mt-2 border rounded-md ${
+                    errors.size ? "border-red-500" : ""
+                  }`}
+                  required
+                />
+                {showTooltip && (
+                  <p className="text-red-500 text-sm mt-2">{errors.size}</p>
+                )}
+              </div>
+              <h2
+                className="text-2xl font-bold mb-4"
+                style={{ color: "#164e63" }}
+              >
+                What Type of Cleaning Would You Like?
+              </h2>
 
-            {/* Frequency 
+              {/* Frequency 
             {(formData.cleaningType === "Regular" ||
               formData.cleaningType === "Total") && (
               <div className="mb-4">
@@ -401,43 +422,43 @@ const QuoteForm = () => {
                 )}
               </div>
             )}*/}
-            {/* Cleaning Type */}
-            <div className="mb-4">
-              <label className="block text-gray-700">Cleaning Type:</label>
-              <select
-                name="cleaningType"
-                value={formData.cleaningType}
-                onChange={handleChange}
-                className="w-full p-2 mt-2 border rounded-md"
-              >
-                <option value="Regular">Regular</option>
-                <option value="Total">Total</option>
-                <option value="Deep">Deep</option>
-              </select>
-            </div>
-            {/* Cleaning Description (solo para móvil) */}
-            <div className="p-4 border-l border-gray-200 sm:hidden">
-              <h3
-                className="text-xl sm:text-2xl font-bold mb-4"
-                style={{ color: "#155e75" }}
-              >
-                {cleaningTitles[formData.cleaningType]}
-              </h3>
-              <p className="text-gray-700 mb-2 text-justify">
-                <em>{cleaningObjectives[formData.cleaningType]}</em>
-              </p>
-              <p className="text-gray-700">
-                {cleaningDescriptions[formData.cleaningType].map(
-                  (line, index) => (
-                    <span key={index}>
-                      {line}
-                      <br />
-                    </span>
-                  )
-                )}
-              </p>
-            </div>
-            {/* Additional Services 
+              {/* Cleaning Type */}
+              <div className="mb-4">
+                <label className="block text-gray-700">Cleaning Type:</label>
+                <select
+                  name="cleaningType"
+                  value={formData.cleaningType}
+                  onChange={handleChange}
+                  className="w-full p-2 mt-2 border rounded-md"
+                >
+                  <option value="Regular">Regular</option>
+                  <option value="Total">Total</option>
+                  <option value="Deep">Deep</option>
+                </select>
+              </div>
+              {/* Cleaning Description (solo para móvil) */}
+              <div className="p-4 border-l border-gray-200 sm:hidden">
+                <h3
+                  className="text-xl sm:text-2xl font-bold mb-4"
+                  style={{ color: "#155e75" }}
+                >
+                  {cleaningTitles[formData.cleaningType]}
+                </h3>
+                <p className="text-gray-700 mb-2 text-justify">
+                  <em>{cleaningObjectives[formData.cleaningType]}</em>
+                </p>
+                <p className="text-gray-700">
+                  {cleaningDescriptions[formData.cleaningType].map(
+                    (line, index) => (
+                      <span key={index}>
+                        {line}
+                        <br />
+                      </span>
+                    )
+                  )}
+                </p>
+              </div>
+              {/* Additional Services 
             {formData.cleaningType === "Regular" && (
               <div className="mb-4">
                 <label className="block text-gray-700">
@@ -502,40 +523,41 @@ const QuoteForm = () => {
               </div>
             )}*/}
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
-            >
-              Get Estimate
-            </button>
-          </form>
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600"
+              >
+                Get Estimate
+              </button>
+            </form>
 
-          {/* Columna derecha: Descripción dinámica del tipo de limpieza (solo en Desktop) */}
-          <div className="p-4 border-l border-gray-200 hidden sm:block">
-            <h3
-              className="text-xl sm:text-2xl font-bold mb-4"
-              style={{ color: "#155e75" }}
-            >
-              {cleaningTitles[formData.cleaningType]}
-            </h3>
-            <p className="text-gray-700 mb-2">
-              {cleaningObjectives[formData.cleaningType]}
-            </p>
-            <p className="text-gray-700">
-              {cleaningDescriptions[formData.cleaningType].map(
-                (line, index) => (
-                  <span key={index}>
-                    {line}
-                    <br />
-                  </span>
-                )
-              )}
-            </p>
+            {/* Columna derecha: Descripción dinámica del tipo de limpieza (solo en Desktop) */}
+            <div className="p-4 border-l border-gray-200 hidden sm:block">
+              <h3
+                className="text-xl sm:text-2xl font-bold mb-4"
+                style={{ color: "#155e75" }}
+              >
+                {cleaningTitles[formData.cleaningType]}
+              </h3>
+              <p className="text-gray-700 mb-2">
+                {cleaningObjectives[formData.cleaningType]}
+              </p>
+              <p className="text-gray-700">
+                {cleaningDescriptions[formData.cleaningType].map(
+                  (line, index) => (
+                    <span key={index}>
+                      {line}
+                      <br />
+                    </span>
+                  )
+                )}
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

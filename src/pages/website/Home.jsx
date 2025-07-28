@@ -50,7 +50,18 @@ export default function Home() {
         {/* Aquí agregas la URL de una imagen representativa */}
         <meta property="og:url" content="https://mcjscleaningservice.com" />
         <link rel="icon" href="/favicon.ico" />
-        <title>MCJ's Cleaning Service</title>
+        <title>
+          House Cleaning Service in Huntsville, AL | MCJ's Cleaning Service
+        </title>
+        <meta
+          name="description"
+          content="Affordable and professional house cleaning services in Huntsville, Alabama. Trusted by happy clients. 100% satisfaction guaranteed with every cleaning."
+        />
+        <meta
+          name="keywords"
+          content="house cleaning huntsville al, maid service huntsville, affordable cleaning services, deep cleaning huntsville, move out cleaning"
+        />
+        <link rel="canonical" href="https://mcjscleaningservice.com/" />
       </Helmet>
 
       <motion.div
