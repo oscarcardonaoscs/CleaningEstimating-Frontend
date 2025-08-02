@@ -1,20 +1,57 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// src/App.jsx
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import ReactGA from "react-ga4";
+
+import Navbar from "./pages/website/components/Navbar";
+import Footer from "./Footer";
+import Home from "./pages/website/Home";
+import ServiceCarousel from "./pages/website/ServiceCarousel";
 import QuoteForm from "./QuoteForm";
 import EstimatePage from "./EstimatePage";
 import ConfirmationPage from "./ConfirmationPage";
 import ChineloPage from "./ChineloPage";
-
-import Footer from "./Footer";
 import PrivacyPolicy from "./pages/website/components/PrivacyPolicy";
-
-import Home from "./pages/website/Home";
-import ServiceCarousel from "./pages/website/ServiceCarousel";
-import Navbar from "./pages/website/components/Navbar";
-
-import React, { useEffect } from "react";
-import ReactGA from "react-ga4";
+import BusinessCard from "./pages/website/components/BusinessCard";
 
 ReactGA.initialize("G-1LB29362HR");
+
+function Layout() {
+  const location = useLocation();
+  const isCardPage = location.pathname === "/business-card";
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      {/* Solo mostramos Navbar si NO estamos en /business-card */}
+      {!isCardPage && <Navbar />}
+
+      <div
+        className={`flex-grow overflow-hidden ${
+          isCardPage ? "flex justify-center items-center" : ""
+        }`}
+      >
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/carrusel" element={<ServiceCarousel />} />
+          <Route path="/estimating" element={<QuoteForm />} />
+          <Route path="/estimate" element={<EstimatePage />} />
+          <Route path="/confirmation" element={<ConfirmationPage />} />
+          <Route path="/chinelo" element={<ChineloPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/business-card" element={<BusinessCard />} />
+        </Routes>
+      </div>
+
+      {/* Solo mostramos Footer si NO estamos en /business-card */}
+      {!isCardPage && <Footer />}
+    </div>
+  );
+}
 
 function App() {
   useEffect(() => {
@@ -23,22 +60,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-
-        <div className="flex-grow overflow-hidden">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/carrusel" element={<ServiceCarousel />} />
-            <Route path="/estimating" element={<QuoteForm />} />
-            <Route path="/estimate" element={<EstimatePage />} />
-            <Route path="/confirmation" element={<ConfirmationPage />} />
-            <Route path="/chinelo" element={<ChineloPage />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          </Routes>
-        </div>
-        <Footer />
-      </div>
+      <Layout />
     </Router>
   );
 }
