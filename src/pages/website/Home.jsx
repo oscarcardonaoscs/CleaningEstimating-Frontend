@@ -5,6 +5,7 @@ import ServingAreas from "../website/components/ServingAreas";
 import CleaningServices from "../website/components/CleaningServices";
 import SatisfactionGuarantee from "../website/components/SatisfactionGuarantee";
 import ContactSection from "../website/components/ContactSection";
+import TrustedSection from "./components/TrustedSection";
 import { motion } from "framer-motion";
 
 // Animación base para secciones al hacer scroll
@@ -94,7 +95,7 @@ export default function Home() {
       >
         <ServingAreas />
       </motion.div>
-
+      <TrustedSection />
       <motion.div
         id="services"
         variants={fadeLeft}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import logo from "../../../Logo_MCJ_transparent.png";
+import logo from "../assets/Logo_MCJ's_2025.png";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
@@ -35,12 +35,9 @@ const Navbar = () => {
 
   return (
     <nav
-      className="bg-blue-900 text-black py-4 shadow-md flex items-center"
+      className="text-black py-4 shadow-md flex items-center"
       style={{
-        backgroundImage:
-          "url('https://duyn491kcolsw.cloudfront.net/files/0k/0kn/0knbtk.jpg?ph=09e1b66bd0')",
-        backgroundPosition: "center center",
-        backgroundAttachment: "scroll",
+        backgroundColor: "#E3FEFF",
         height: "80px",
       }}
     >
@@ -55,7 +52,7 @@ const Navbar = () => {
         </Link>
 
         {/* Menú para desktop */}
-        <div className="hidden md:flex space-x-6">
+        <div className="hidden md:flex space-x-6 business-card text-lg">
           <button
             onClick={() => scrollToSection("about")}
             className="hover:text-yellow-400"
