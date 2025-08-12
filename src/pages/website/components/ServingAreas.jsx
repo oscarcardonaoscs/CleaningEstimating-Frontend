@@ -7,19 +7,24 @@ export default function ServingAreas() {
   };
 
   return (
-    <section className="bg-white text-gray-800 py-16 text-center">
+    <section className="bg-white text-gray-800 py-16 text-center overflow-x-hidden">
       <h2 className="text-3xl font-bold">Serving Areas</h2>
       <div className="w-16 h-1 bg-blue-500 mx-auto my-2"></div>
 
       <p className="text-description max-w-2xl mx-auto mt-4 px-6">
-        MCJ's Cleaning Service proudly serves numerous cities and communities in Alabama:
+        MCJ's Cleaning Service proudly serves numerous cities and communities in
+        Alabama:
       </p>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-6">
         {[
           { name: "Huntsville", img: "/assets/rocketCity.webp", zoom: "cover" },
           { name: "Madison", img: "/assets/MadisonCity.webp", zoom: "cover" },
-          { name: "Owens Cross Roads", img: "/assets/OwensCrossRoadsCity.webp", zoom: "99%" },
+          {
+            name: "Owens Cross Roads",
+            img: "/assets/OwensCrossRoadsCity.webp",
+            zoom: "99%",
+          },
           { name: "Athens", img: "/assets/AthensCity.png", zoom: "85%" },
         ].map((city) => (
           <div
@@ -28,7 +33,7 @@ export default function ServingAreas() {
           >
             {/* Imagen de fondo con animación */}
             <div
-              className="absolute inset-0 transition-transform duration-300 ease-in-out transform group-hover:scale-[1.4]"
+              className="absolute inset-0 transition-transform duration-300 ease-in-out transform-gpu group-hover:scale-110"
               style={{
                 backgroundImage: `url(${city.img})`,
                 backgroundSize: city.zoom,
@@ -46,7 +51,7 @@ export default function ServingAreas() {
           </div>
         ))}
       </div>
-      
+
       <p className="text-center text-lg mt-6">
         Not sure if we service your area?{" "}
         <button

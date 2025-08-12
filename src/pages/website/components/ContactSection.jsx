@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import BASE_URL from "../../../config.js"
+import BASE_URL from "../../../config.js";
 
 export default function ContactSection() {
   const recaptchaRef = useRef();
@@ -45,20 +45,26 @@ export default function ContactSection() {
   };
 
   return (
-    <section className="bg-[#E3F2F9] text-gray-800 py-16 px-6 text-center">
+    <section className="bg-[#E3F2F9] text-gray-800 py-16 px-6 text-center overflow-x-hidden">
       <h2 className="text-3xl font-bold">Contact Us</h2>
       <div className="w-16 h-1 bg-red-500 mx-auto my-2"></div>
       <p className="text-description max-w-2xl mx-auto mt-4">
-        Proudly serving Huntsville, Madison, Owens Cross Roads, Athens and more in Alabama.
+        Proudly serving Huntsville, Madison, Owens Cross Roads, Athens and more
+        in Alabama.
       </p>
       <p className="text-description max-w-2xl mx-auto mt-4 px-6">
-        We appreciate your interest in MCJ's Cleaning Service. Reach out to us through any of the following channels:
+        We appreciate your interest in MCJ's Cleaning Service. Reach out to us
+        through any of the following channels:
       </p>
 
       {/* Información de Contacto */}
       <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-8">
         <div className="flex items-center gap-4">
-          <img src="/assets/ring-phone.png" alt="Phone Icon" className="w-8 h-8" />
+          <img
+            src="/assets/ring-phone.png"
+            alt="Phone Icon"
+            className="w-8 h-8"
+          />
           <p className="text-lg font-semibold">551-227-0373</p>
         </div>
         <div className="flex items-center gap-4">
@@ -74,25 +80,59 @@ export default function ContactSection() {
         </div>
       ) : (
         // Formulario de Contacto
-        <form className="max-w-lg mx-auto mt-8 bg-white p-6 shadow-lg rounded-lg" onSubmit={handleSubmit}>
+        <form
+          className="max-w-lg mx-auto mt-8 bg-white p-6 shadow-lg rounded-lg"
+          onSubmit={handleSubmit}
+        >
           <div className="mb-4 text-left">
-            <label className="text-description block font-semibold">Your Name</label>
-            <input type="text" name="nombre" placeholder="Your Name" className="w-full p-3 border rounded" required />
+            <label className="text-description block font-semibold">
+              Your Name
+            </label>
+            <input
+              type="text"
+              name="nombre"
+              placeholder="Your Name"
+              className="w-full p-3 border rounded"
+              required
+            />
           </div>
 
           <div className="mb-4 text-left">
-            <label className="text-description block font-semibold">Email</label>
-            <input type="email" name="correo" placeholder="Your Email" className="w-full p-3 border rounded" required />
+            <label className="text-description block font-semibold">
+              Email
+            </label>
+            <input
+              type="email"
+              name="correo"
+              placeholder="Your Email"
+              className="w-full p-3 border rounded"
+              required
+            />
           </div>
 
           <div className="mb-4 text-left">
-            <label className="text-description block font-semibold">Phone number</label>
-            <input type="tel" name="telefono" placeholder="Your Phone" className="w-full p-3 border rounded" required/>
+            <label className="text-description block font-semibold">
+              Phone number
+            </label>
+            <input
+              type="tel"
+              name="telefono"
+              placeholder="Your Phone"
+              className="w-full p-3 border rounded"
+              required
+            />
           </div>
 
           <div className="mb-4 text-left">
-            <label className="text-description block font-semibold">Message</label>
-            <textarea placeholder="Your Message" name="mensaje" className="w-full p-3 border rounded h-28 " required></textarea>
+            <label className="text-description block font-semibold">
+              Message
+            </label>
+            <textarea
+              placeholder="Your Message"
+              name="mensaje"
+              className="w-full p-3 border rounded h-28 "
+              required
+            ></textarea>
           </div>
 
           {/* reCAPTCHA v3 (Invisible) */}
@@ -102,7 +142,10 @@ export default function ContactSection() {
             size="invisible"
           />
 
-          <button type="submit" className="w-full bg-emerald-900 text-white py-3 rounded-lg hover:bg-emerald-500 transition">
+          <button
+            type="submit"
+            className="w-full bg-emerald-900 text-white py-3 rounded-lg hover:bg-emerald-500 transition"
+          >
             Send
           </button>
         </form>

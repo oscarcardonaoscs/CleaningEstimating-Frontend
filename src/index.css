@@ -19,3 +19,13 @@ body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
 }
+.grecaptcha-badge {
+  right: 8px !important;
+  bottom: 8px !important;
+}
+@media (max-width: 480px) {
+  .grecaptcha-badge {
+    transform: scale(0.9);
+    transform-origin: bottom right;
+  }
+}

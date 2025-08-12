@@ -26,12 +26,12 @@ function Layout() {
   const isCardPage = location.pathname === "/business-card";
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Solo mostramos Navbar si NO estamos en /business-card */}
+    <div className="min-h-screen flex flex-col overflow-x-clip">
+      {" "}
+      {/* <= agregado */}
       {!isCardPage && <Navbar />}
-
       <div
-        className={`flex-grow overflow-hidden ${
+        className={`flex-grow ${
           isCardPage ? "flex justify-center items-center" : ""
         }`}
       >
@@ -46,8 +46,6 @@ function Layout() {
           <Route path="/business-card" element={<BusinessCard />} />
         </Routes>
       </div>
-
-      {/* Solo mostramos Footer si NO estamos en /business-card */}
       {!isCardPage && <Footer />}
     </div>
   );
