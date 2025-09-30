@@ -18,6 +18,7 @@ import ConfirmationPage from "./ConfirmationPage";
 import ChineloPage from "./ChineloPage";
 import PrivacyPolicy from "./pages/website/components/PrivacyPolicy";
 import BusinessCard from "./pages/website/components/BusinessCard";
+import PaymentOptionsCard from "./pages/website/components/PaymentOptionsCard";
 
 ReactGA.initialize("G-1LB29362HR");
 
@@ -44,6 +45,7 @@ function Layout() {
           <Route path="/chinelo" element={<ChineloPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/business-card" element={<BusinessCard />} />
+          <Route path="/pay" element={<PaymentOptionsCard />} />
         </Routes>
       </div>
       {!isCardPage && <Footer />}
