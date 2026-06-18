@@ -13,12 +13,14 @@ import Footer from "./Footer";
 import Home from "./pages/website/Home";
 import ServiceCarousel from "./pages/website/ServiceCarousel";
 import QuoteForm from "./QuoteForm";
+import QuoteFormV2 from "./pages/QuoteFormV2";
 import EstimatePage from "./EstimatePage";
 import ConfirmationPage from "./ConfirmationPage";
 import ChineloPage from "./ChineloPage";
 import PrivacyPolicy from "./pages/website/components/PrivacyPolicy";
 import BusinessCard from "./pages/website/components/BusinessCard";
 import PaymentOptionsCard from "./pages/website/components/PaymentOptionsCard";
+import ServiceTypesPage from "./pages/website/ServiceTypesPage";
 
 ReactGA.initialize("G-1LB29362HR");
 
@@ -40,12 +42,14 @@ function Layout() {
           <Route path="/" element={<Home />} />
           <Route path="/carrusel" element={<ServiceCarousel />} />
           <Route path="/estimating" element={<QuoteForm />} />
+          <Route path="/quoteForm" element={<QuoteFormV2 />} />
           <Route path="/estimate" element={<EstimatePage />} />
           <Route path="/confirmation" element={<ConfirmationPage />} />
           <Route path="/chinelo" element={<ChineloPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/business-card" element={<BusinessCard />} />
           <Route path="/pay" element={<PaymentOptionsCard />} />
+          <Route path="/serviceTypes" element={<ServiceTypesPage />} />
         </Routes>
       </div>
       {!isCardPage && <Footer />}

@@ -69,12 +69,10 @@ const Navbar = () => {
           >
             Serving Areas
           </button>
-          <button
-            onClick={() => scrollToSection("services")}
-            className="hover:text-yellow-400"
-          >
-            Our Services
-          </button>
+
+          <Link to="/serviceTypes" className="hover:text-yellow-400">
+            Services
+          </Link>
           <button
             onClick={() => scrollToSection("contact")}
             className="hover:text-yellow-400"

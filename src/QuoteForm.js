@@ -454,7 +454,7 @@ const QuoteForm = () => {
                         {line}
                         <br />
                       </span>
-                    )
+                    ),
                   )}
                 </p>
               </div>
@@ -550,7 +550,7 @@ const QuoteForm = () => {
                       {line}
                       <br />
                     </span>
-                  )
+                  ),
                 )}
               </p>
             </div>

@@ -20,6 +20,7 @@ export default function ContactSection() {
     const formData = {
       nombre: e.target.elements.nombre.value,
       correo: e.target.elements.correo.value,
+      telefono: e.target.elements.telefono.value,
       mensaje: e.target.elements.mensaje.value,
     };
 

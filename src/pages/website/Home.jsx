@@ -1,8 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import HeroSection from "../website/components/HeroSection";
 import AboutUs from "../website/components/AboutUs";
-import ServingAreas from "../website/components/ServingAreas";
-import CleaningServices from "../website/components/CleaningServices";
 import SatisfactionGuarantee from "../website/components/SatisfactionGuarantee";
 import ContactSection from "../website/components/ContactSection";
 import TrustedSection from "./components/TrustedSection";
@@ -33,36 +31,109 @@ export default function Home() {
   return (
     <div className="relative w-full min-h-screen">
       <Helmet>
+        <title>
+          House Cleaning Services in Huntsville, AL | MCJ's Cleaning Service
+        </title>
+
         <meta
           name="description"
-          content="MCJ's Cleaning Service offers professional cleaning services for homes, with satisfaction guaranteed. Book your cleaning today!"
+          content="MCJ's Cleaning Service offers professional house cleaning services in Huntsville, Madison, Athens, Harvest, Owens Cross Roads, Brownsboro, and nearby North Alabama areas. Regular, total, deep, move-in, move-out, and post-construction cleaning available."
         />
-        <meta
-          name="keywords"
-          content="cleaning, house cleaning, professional cleaning, satisfaction guarantee, MCJ's Cleaning Service, cleaning services, housekeeper, maid service, home cleaning, deep cleaning, Madison, Huntsville, Athens, Hampton Cove, Owens Cross Roads, Brownsboro, Alabama, local, regular cleaning, total cleaning"
-        />
+
         <meta name="author" content="Oscar Cardona" />
-        <meta property="og:title" content="MCJ's Cleaning Service" />
+
+        <link rel="canonical" href="https://mcjscleaningservice.com/" />
+
+        <meta
+          property="og:title"
+          content="House Cleaning Services in Huntsville, AL | MCJ's Cleaning Service"
+        />
+
         <meta
           property="og:description"
-          content="Professional home cleaning services with guaranteed satisfaction. Book your cleaning now."
+          content="Professional residential cleaning services in Huntsville, Madison, Athens, Harvest, Owens Cross Roads, Brownsboro, and nearby North Alabama areas."
         />
-        <meta property="og:image" content="url-to-image.jpg" />{" "}
-        {/* Aquí agregas la URL de una imagen representativa */}
-        <meta property="og:url" content="https://mcjscleaningservice.com" />
-        <link rel="icon" href="/favicon.ico" />
-        <title>
-          House Cleaning Service in Huntsville, AL | MCJ's Cleaning Service
-        </title>
+
+        <meta property="og:url" content="https://mcjscleaningservice.com/" />
+        <meta property="og:type" content="website" />
         <meta
-          name="description"
-          content="Affordable and professional house cleaning services in Huntsville, Alabama. Trusted by happy clients. 100% satisfaction guaranteed with every cleaning."
+          property="og:image"
+          content="https://mcjscleaningservice.com/assets/regularCleaning.jpg"
+        />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="House Cleaning Services in Huntsville, AL | MCJ's Cleaning Service"
         />
         <meta
-          name="keywords"
-          content="house cleaning huntsville al, maid service huntsville, affordable cleaning services, deep cleaning huntsville, move out cleaning"
+          name="twitter:description"
+          content="Professional residential cleaning services in Huntsville, Madison, Athens, Harvest, Owens Cross Roads, Brownsboro, and nearby areas."
         />
-        <link rel="canonical" href="https://mcjscleaningservice.com/" />
+        <meta
+          name="twitter:image"
+          content="https://mcjscleaningservice.com/assets/regularCleaning.jpg"
+        />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            name: "MCJ's Cleaning Service",
+            url: "https://mcjscleaningservice.com/",
+            telephone: "+1-551-227-0373",
+            email: "mcjscleaning@gmail.com",
+            description:
+              "Professional residential cleaning services in Huntsville, Madison, Athens, Harvest, Owens Cross Roads, Brownsboro, and nearby North Alabama areas.",
+            areaServed: [
+              "Huntsville, AL",
+              "Madison, AL",
+              "Athens, AL",
+              "Harvest, AL",
+              "Owens Cross Roads, AL",
+              "Brownsboro, AL",
+              "Hampton Cove, AL",
+            ],
+            priceRange: "$$",
+            makesOffer: [
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Regular Cleaning",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Total Cleaning",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Deep Cleaning",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Move-In / Move-Out Cleaning",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Post-Construction Cleaning",
+                },
+              },
+            ],
+          })}
+        </script>
       </Helmet>
 
       <motion.div
@@ -85,7 +156,7 @@ export default function Home() {
       >
         <AboutUs />
       </motion.div>
-      <motion.div
+      {/* <motion.div
         id="serving"
         variants={fadeRight}
         initial="hidden"
@@ -94,8 +165,7 @@ export default function Home() {
         transition={{ duration: 0.8, delay: 0.1 }}
       >
         <ServingAreas />
-      </motion.div>
-      <TrustedSection />
+      </motion.div> */}
       <motion.div
         id="services"
         variants={fadeLeft}
@@ -104,8 +174,114 @@ export default function Home() {
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <CleaningServices />
+        <section className="bg-white py-20 px-6">
+          <div className="max-w-6xl mx-auto text-center">
+            <p className="text-sm uppercase tracking-widest text-lime-600 font-bold">
+              Our Cleaning Services
+            </p>
+
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-3">
+              Every home has different needs.
+            </h2>
+
+            <div className="w-16 h-1 bg-blue-500 mx-auto my-4"></div>
+
+            <p className="text-description max-w-2xl mx-auto">
+              Choose the cleaning service that best fits your home, from
+              recurring maintenance to deep, move-in/out, and post-construction
+              cleaning.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-6 mt-12">
+              {[
+                {
+                  title: "Regular Cleaning",
+                  description:
+                    "Perfect for recurring maintenance and a fresh home.",
+                  image: "/assets/regularCleaning.jpg",
+                },
+                {
+                  title: "Total Cleaning",
+                  description: "A more detailed service for busy homes.",
+                  image: "/assets/totalCleaning.jpg",
+                },
+                {
+                  title: "Deep Cleaning",
+                  description: "Our most detailed service for extra attention.",
+                  image: "/assets/deepCleaning.webp",
+                },
+              ].map((service) => (
+                <div
+                  key={service.title}
+                  className="bg-white rounded-2xl shadow-md overflow-hidden text-left hover:-translate-y-1 hover:shadow-xl transition duration-300"
+                >
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-44 object-cover"
+                  />
+
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900">
+                      {service.title}
+                    </h3>
+
+                    <p className="text-gray-600 mt-2">{service.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 mt-6 max-w-4xl mx-auto">
+              {[
+                {
+                  title: "Move In / Move Out Cleaning",
+                  description: "Ideal for empty homes before or after moving.",
+                  image: "/assets/moveInOutCleaning.jpg",
+                },
+                {
+                  title: "Post Construction Cleaning",
+                  description:
+                    "Detailed dust removal after renovations or remodeling.",
+                  image: "/assets/postConstructionCleaning.jpg",
+                },
+              ].map((service) => (
+                <div
+                  key={service.title}
+                  className="bg-white rounded-2xl shadow-md overflow-hidden text-left hover:-translate-y-1 hover:shadow-xl transition duration-300"
+                >
+                  <div className="grid grid-cols-3">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover col-span-1"
+                    />
+
+                    <div className="p-6 col-span-2">
+                      <h3 className="text-xl font-bold text-gray-900">
+                        {service.title}
+                      </h3>
+
+                      <p className="text-gray-600 mt-2">
+                        {service.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href="/serviceTypes"
+              className="inline-block mt-10 bg-yellow-400 text-blue-900 px-6 py-3 rounded-md font-semibold hover:bg-yellow-500 transition"
+            >
+              View All Services →
+            </a>
+          </div>
+        </section>
       </motion.div>
+
+      <TrustedSection />
 
       <motion.div
         variants={fadeUp}
