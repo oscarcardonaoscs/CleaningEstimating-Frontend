@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import HeroSection from "../website/components/HeroSection";
 import AboutUs from "../website/components/AboutUs";
+import CustomerReviews from "./components/CustomerReviews";
 import SatisfactionGuarantee from "../website/components/SatisfactionGuarantee";
 import ContactSection from "../website/components/ContactSection";
 import TrustedSection from "./components/TrustedSection";
@@ -280,7 +281,9 @@ export default function Home() {
           </div>
         </section>
       </motion.div>
-
+      <div id="reviews">
+        <CustomerReviews />
+      </div>
       <TrustedSection />
 
       <motion.div

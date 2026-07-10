@@ -1,89 +1,158 @@
-import React from "react";
+import { motion } from "framer-motion";
+import "./CustomerReviews.css";
 
-const reviews = [
+const GOOGLE_REVIEWS_URL =
+  "https://www.google.com/maps/place/MCJ's+Cleaning+Service/@34.7079478,-86.8867823,11z/data=!3m1!4b1!4m6!3m5!1s0x8770d0dbc5f7d1c1:0x3c59563c0f3f4b04!8m2!3d34.7077765!4d-86.721975!16s%2Fg%2F11zgflydmh";
+
+const googleReviewStats = {
+  rating: 5.0,
+  reviewsCount: 10,
+  updatedAt: "July 2026",
+};
+
+const customerReviews = [
   {
     id: 1,
-    name: "Sarah L.",
-    location: "Huntsville, AL",
-    text: "MCJ’s team was on time, professional, and extremely detailed. The kitchen and bathrooms looked brand new.",
+    name: "Jennifer Chaney",
+    initial: "J",
+    rating: 5,
+    date: "July 9, 2026",
+    text: "We've been using MCJ's Cleaning Service for nearly 3 years across two properties. They are top notch—trustworthy, attentive to detail, and genuinely committed to customer satisfaction.",
   },
   {
     id: 2,
-    name: "Michael B.",
-    location: "Madison, AL",
-    text: "Great communication and consistent quality. We love walking into a fresh home after every cleaning.",
+    name: "Brooke Bush",
+    initial: "B",
+    rating: 5,
+    date: "July 8, 2026",
+    text: "From the moment we connected with MCJ, they were professional, friendly, and incredibly thorough. They paid attention to every detail, and our home has never looked or smelled so clean.",
   },
   {
     id: 3,
-    name: "Alyssa R.",
-    location: "Owens Cross Roads, AL",
-    text: "We booked a deep clean and they exceeded expectations. Very thorough and respectful of our space.",
+    name: "Elizabeth",
+    initial: "E",
+    rating: 5,
+    date: "July 8, 2026",
+    text: "MCJ is punctual, professional, thorough, and easy to communicate with. They are flexible, accommodating, and provide an exceptional level of service.",
   },
 ];
 
-function getInitials(name) {
-  return name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .toUpperCase();
-}
+const renderStars = (rating) => {
+  return "★".repeat(rating);
+};
 
-export default function CustomerReviews() {
+const CustomerReviews = () => {
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        {/* Header */}
-        <div className="mb-12">
-          <h4 className="text-sm font-semibold tracking-widest text-yellow-600 uppercase mb-3">
-            Not yet convinced?
-          </h4>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Read Customer Reviews
-          </h2>
-          <div className="mt-4 h-1 w-20 bg-yellow-500 mx-auto rounded-full" />
-        </div>
+    <section
+      className="customer-reviews-section"
+      aria-labelledby="customer-reviews-title"
+    >
+      <div className="customer-reviews-container">
+        <motion.div
+          className="customer-reviews-header"
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="customer-reviews-eyebrow">
+            Trusted by Local Families
+          </span>
 
-        {/* Reviews */}
-        <div className="grid grid-cols-1 md:grid-cols-3 border border-gray-200">
-          {reviews.map((r, index) => (
-            <div
-              key={r.id}
-              className={`p-8 ${
-                index < reviews.length - 1 ? "md:border-r border-gray-200" : ""
-              } border-b md:border-b-0 border-gray-200`}
+          <h2 id="customer-reviews-title">
+            Real feedback from families who trust us with their homes.
+          </h2>
+
+          <div className="google-rating-summary">
+            <div className="google-rating-main">
+              <div
+                className="google-rating-stars"
+                aria-label={`${googleReviewStats.rating} out of 5 stars`}
+              >
+                {renderStars(5)}
+              </div>
+
+              <div className="google-rating-score">
+                {googleReviewStats.rating.toFixed(1)}
+              </div>
+            </div>
+
+            <div className="google-rating-details">
+              <strong>Google Reviews</strong>
+
+              <span>
+                Based on {googleReviewStats.reviewsCount} customer reviews as of{" "}
+                {googleReviewStats.updatedAt}.
+              </span>
+            </div>
+          </div>
+
+          <p className="customer-reviews-intro">
+            We are grateful for every family who trusts MCJ&apos;s Cleaning
+            Service with their home. Your feedback means a lot to our small
+            family-owned business and motivates us to keep providing careful,
+            consistent, and dependable cleaning service.
+          </p>
+        </motion.div>
+
+        <div className="customer-reviews-grid">
+          {customerReviews.map((review, index) => (
+            <motion.article
+              className="customer-review-card"
+              key={review.id}
+              initial={{ opacity: 0, y: 35 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.12,
+              }}
             >
-              {/* Avatar */}
-              <div className="flex justify-center mb-6">
-                <div className="w-20 h-20 rounded-full bg-yellow-500 text-white flex items-center justify-center text-xl font-bold">
-                  {getInitials(r.name)}
+              <div className="customer-review-card-top">
+                <div className="customer-review-avatar" aria-hidden="true">
+                  {review.initial}
+                </div>
+
+                <div className="customer-review-customer">
+                  <h3>{review.name}</h3>
+
+                  <div
+                    className="customer-review-customer-stars"
+                    aria-label={`${review.rating} out of 5 stars`}
+                  >
+                    {renderStars(review.rating)}
+                  </div>
                 </div>
               </div>
 
-              {/* Review text */}
-              <p className="text-gray-600 leading-relaxed mb-6">“{r.text}”</p>
+              <p className="customer-review-text">{review.text}</p>
 
-              {/* Name */}
-              <h5 className="font-semibold text-gray-900">{r.name}</h5>
-              <span className="text-xs uppercase tracking-wide text-gray-500">
-                {r.location}
-              </span>
-            </div>
+              <div className="customer-review-footer">
+                <span>{review.date}</span>
+              </div>
+            </motion.article>
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="mt-10">
+        <motion.div
+          className="customer-reviews-actions"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
           <a
-            href="https://g.page/r/your-google-profile"
+            href={GOOGLE_REVIEWS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block px-6 py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-800 transition"
+            className="customer-reviews-btn customer-reviews-btn-outline"
           >
-            Read more on Google
+            Read Our Reviews on Google
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
-}
+};
+
+export default CustomerReviews;
