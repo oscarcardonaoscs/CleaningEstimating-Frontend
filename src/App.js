@@ -12,7 +12,6 @@ import Navbar from "./pages/website/components/Navbar";
 import Footer from "./Footer";
 import Home from "./pages/website/Home";
 import ServiceCarousel from "./pages/website/ServiceCarousel";
-import QuoteForm from "./QuoteForm";
 import QuoteFormV2 from "./pages/QuoteFormV2";
 import EstimatePage from "./EstimatePage";
 import ConfirmationPage from "./ConfirmationPage";
@@ -41,8 +40,7 @@ function Layout() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/carrusel" element={<ServiceCarousel />} />
-          <Route path="/estimating" element={<QuoteForm />} />
-          <Route path="/quoteForm" element={<QuoteFormV2 />} />
+          <Route path="/estimating" element={<QuoteFormV2 />} />
           <Route path="/estimate" element={<EstimatePage />} />
           <Route path="/confirmation" element={<ConfirmationPage />} />
           <Route path="/chinelo" element={<ChineloPage />} />
