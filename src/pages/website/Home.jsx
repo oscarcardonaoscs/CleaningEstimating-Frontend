@@ -6,6 +6,7 @@ import SatisfactionGuarantee from "../website/components/SatisfactionGuarantee";
 import ContactSection from "../website/components/ContactSection";
 import TrustedSection from "./components/TrustedSection";
 import { motion } from "framer-motion";
+import SeasonalSection from "./components/SeasonalSection";
 
 // Animación base para secciones al hacer scroll
 const fadeUp = {
@@ -156,6 +157,7 @@ export default function Home() {
         transition={{ duration: 0.8 }}
       >
         <AboutUs />
+        <SeasonalSection />
       </motion.div>
       {/* <motion.div
         id="serving"

@@ -2,12 +2,18 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/Logo_MCJ's_2025.png";
 import { FaBars, FaTimes } from "react-icons/fa";
+import { getActiveSeason } from "../config/seasonalConfig";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Seasonal Theme: activo solamente en Home
+  const activeSeason = location.pathname === "/" ? getActiveSeason() : null;
+
+  const navbarBackground = activeSeason?.backgroundColor ?? "#E3FEFF";
 
   const scrollToSection = (id) => {
     const scroll = () => {
@@ -53,9 +59,9 @@ const Navbar = () => {
 
   return (
     <nav
-      className="text-black py-4 shadow-md flex items-center"
+      className="text-black py-4 flex items-center transition-colors duration-500"
       style={{
-        backgroundColor: "#E3FEFF",
+        backgroundColor: navbarBackground,
         height: "80px",
       }}
     >

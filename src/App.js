@@ -20,6 +20,7 @@ import PrivacyPolicy from "./pages/website/components/PrivacyPolicy";
 import BusinessCard from "./pages/website/components/BusinessCard";
 import PaymentOptionsCard from "./pages/website/components/PaymentOptionsCard";
 import ServiceTypesPage from "./pages/website/ServiceTypesPage";
+import SeasonalBar from "./pages/website/components/SeasonalBar";
 
 ReactGA.initialize("G-1LB29362HR");
 
@@ -32,6 +33,7 @@ function Layout() {
       {" "}
       {/* <= agregado */}
       {!isCardPage && <Navbar />}
+      {location.pathname === "/" && <SeasonalBar />}
       <div
         className={`flex-grow ${
           isCardPage ? "flex justify-center items-center" : ""
