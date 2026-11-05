@@ -2005,6 +2005,10 @@ const QuoteFormV2 = () => {
           name="description"
           content="Get an instant residential cleaning estimate from MCJ's Cleaning Service."
         />
+        <link
+          rel="canonical"
+          href="https://mcjscleaningservice.com/estimating"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
