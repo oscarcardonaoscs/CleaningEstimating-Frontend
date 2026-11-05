@@ -27,6 +27,12 @@ ReactGA.initialize("G-1LB29362HR");
 function Layout() {
   const location = useLocation();
   const isCardPage = location.pathname === "/business-card";
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: location.pathname + location.search,
+    });
+  }, [location.pathname, location.search]);
 
   return (
     <div className="min-h-screen flex flex-col overflow-x-clip">
@@ -50,6 +56,7 @@ function Layout() {
           <Route path="/business-card" element={<BusinessCard />} />
           <Route path="/pay" element={<PaymentOptionsCard />} />
           <Route path="/serviceTypes" element={<ServiceTypesPage />} />
+          <Route path="/services/:serviceSlug" element={<ServiceTypesPage />} />
         </Routes>
       </div>
       {!isCardPage && <Footer />}
@@ -58,10 +65,6 @@ function Layout() {
 }
 
 function App() {
-  useEffect(() => {
-    ReactGA.send("pageview");
-  }, []);
-
   return (
     <Router>
       <Layout />

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { Helmet } from "react-helmet-async";
 
@@ -441,7 +442,7 @@ const services = [
   },
 ];
 
-function ServiceCard({ service, onViewDetails }) {
+function ServiceCard({ service }) {
   const Icon = service.icon;
 
   return (
@@ -481,13 +482,12 @@ function ServiceCard({ service, onViewDetails }) {
           ))}
         </ul>
 
-        <button
-          type="button"
-          onClick={() => onViewDetails(service)}
-          className={`mt-6 text-white px-5 py-3 rounded-lg font-semibold transition ${service.buttonColor}`}
+        <Link
+          to={`/services/${service.slug}`}
+          className={`inline-block mt-6 text-white px-5 py-3 rounded-lg font-semibold transition ${service.buttonColor}`}
         >
           View Details →
-        </button>
+        </Link>
       </div>
     </article>
   );
@@ -535,8 +535,9 @@ function ServiceDetailView({ service, onBack, onContact }) {
               </p>
 
               <p className="text-white/90 mt-4 max-w-2xl">
-                Review what is included in this cleaning service and contact us
-                if you would like help choosing the best option for your home.
+                Available for homes in Huntsville and Madison, AL, subject to
+                scheduling and service-area availability. Review what is
+                included and contact us for a personalized estimate.
               </p>
             </div>
           </div>
@@ -613,80 +614,122 @@ function ServiceDetailView({ service, onBack, onContact }) {
   );
 }
 
-export default function ServiceTypesPage() {
-  const [showContact, setShowContact] = useState(false);
+const serviceSEOMetadata = {
+  "regular-cleaning": {
+    title: "Regular House Cleaning Huntsville & Madison, AL | MCJ",
+    description:
+      "Recurring house cleaning in Huntsville and Madison, AL. Regular service covers kitchens, bathrooms, dusting, and floors. Ask MCJ for a free estimate.",
+  },
+  "total-cleaning": {
+    title: "Total House Cleaning Huntsville & Madison, AL | MCJ",
+    description:
+      "Total Cleaning in Huntsville and Madison, AL adds baseboards, blinds, ceiling fans and interior windows to our Regular service. Get a free estimate.",
+  },
+  "deep-cleaning": {
+    title: "Deep Cleaning Huntsville & Madison, AL | MCJ",
+    description:
+      "Deep house cleaning in Huntsville and Madison, AL, including detailed bathrooms, kitchens, baseboards, blinds and window areas. Request an estimate.",
+  },
+  "move-in-out-cleaning": {
+    title: "Move-In/Out Cleaning Huntsville & Madison, AL | MCJ",
+    description:
+      "Move-in and move-out cleaning for empty homes in Huntsville and Madison, AL. Detailed kitchens, bathrooms, cabinets, appliances and floors.",
+  },
+  "post-construction-cleaning": {
+    title: "Post-Construction Cleaning Huntsville & Madison, AL | MCJ",
+    description:
+      "Post-construction cleaning for homes in Huntsville and Madison, AL after renovation or remodeling. Detailed dust removal and surface cleaning.",
+  },
+};
 
-  const [selectedService, setSelectedService] = useState(null);
+export default function ServiceTypesPage() {
+  const { serviceSlug } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [showContact, setShowContact] = useState(false);
+  const selectedService = serviceSlug
+    ? services.find((service) => service.slug === serviceSlug)
+    : null;
+
+  // Preserve old shared URLs such as /serviceTypes?service=deep-cleaning.
+  useEffect(() => {
+    if (serviceSlug) return;
+    const legacySlug = new URLSearchParams(location.search).get("service");
+    if (legacySlug && services.some((service) => service.slug === legacySlug)) {
+      navigate(`/services/${legacySlug}`, { replace: true });
+    }
+  }, [serviceSlug, location.search, navigate]);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-
-    const serviceSlug = params.get("service");
-
-    if (serviceSlug) {
-      const service = services.find((item) => item.slug === serviceSlug);
-
-      if (service) {
-        setSelectedService(service);
-
-        setTimeout(() => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }, 50);
-      }
-    }
-  }, []);
-
-  const handleViewDetails = (service) => {
-    setSelectedService(service);
-
+    window.scrollTo({ top: 0, behavior: "auto" });
     setShowContact(false);
+  }, [serviceSlug]);
 
-    window.history.pushState(null, "", `/serviceTypes?service=${service.slug}`);
-
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 50);
-  };
-
-  const handleBackToServices = () => {
-    setSelectedService(null);
-
-    window.history.pushState(null, "", "/serviceTypes");
-
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 50);
-  };
+  const handleBackToServices = () => navigate("/serviceTypes");
 
   const handleShowContact = () => {
+    if (serviceSlug) {
+      navigate("/");
+
+      setTimeout(() => {
+        const contactSection = document.getElementById("contact");
+
+        if (contactSection) {
+          contactSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, 300);
+
+      return;
+    }
+
     setShowContact(true);
 
-    setSelectedService(null);
-
     setTimeout(() => {
-      const contactSection = document.getElementById("contact");
-
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 150);
+      document.getElementById("contact")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 300);
   };
+
+  useEffect(() => {
+    if (serviceSlug && !selectedService)
+      navigate("/serviceTypes", { replace: true });
+  }, [serviceSlug, selectedService, navigate]);
+
+  const title = selectedService
+    ? serviceSEOMetadata[selectedService.slug].title
+    : "Cleaning Services Huntsville & Madison, AL | MCJ";
+  const description = selectedService
+    ? serviceSEOMetadata[selectedService.slug].description
+    : "Explore Regular, Total, Deep, Move-In/Out and Post-Construction cleaning in Huntsville and Madison, AL. Find the right service and request an estimate.";
+  const canonical = selectedService
+    ? `https://mcjscleaningservice.com/services/${selectedService.slug}`
+    : "https://mcjscleaningservice.com/serviceTypes";
 
   return (
     <main className="bg-white min-h-screen">
       <Helmet>
-        <title>
-          Cleaning Services in Huntsville, AL | MCJ's Cleaning Service
-        </title>
-
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonical} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonical} />
         <meta
-          name="description"
-          content="Explore our Regular, Total, Deep, Move In/Out, and Post Construction cleaning services in Huntsville and surrounding areas."
+          property="og:image"
+          content="https://mcjscleaningservice.com/assets/regularCleaning.jpg"
         />
-
-        <link
-          rel="canonical"
-          href="https://mcjscleaningservice.com/serviceTypes"
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta
+          name="twitter:image"
+          content="https://mcjscleaningservice.com/assets/regularCleaning.jpg"
         />
       </Helmet>
 
@@ -705,32 +748,24 @@ export default function ServiceTypesPage() {
               </p>
 
               <h1 className="text-4xl font-bold text-gray-900 mt-3 font-['Playfair_Display']">
-                Our Cleaning Services in Huntsville, AL
+                Our Cleaning Services in Huntsville & Madison, AL
               </h1>
 
               <p className="text-description mt-3">
-                Every home has different needs. Choose the service that best
-                fits your home.
+                Every home has different needs. Explore professional cleaning
+                options for homes in Huntsville and Madison, Alabama.
               </p>
             </div>
 
             <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto mt-12">
               {services.slice(0, 3).map((service) => (
-                <ServiceCard
-                  key={service.slug}
-                  service={service}
-                  onViewDetails={handleViewDetails}
-                />
+                <ServiceCard key={service.slug} service={service} />
               ))}
             </div>
 
             <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto mt-8">
               {services.slice(3).map((service) => (
-                <ServiceCard
-                  key={service.slug}
-                  service={service}
-                  onViewDetails={handleViewDetails}
-                />
+                <ServiceCard key={service.slug} service={service} />
               ))}
             </div>
           </section>

@@ -2003,12 +2003,21 @@ const QuoteFormV2 = () => {
         <title>{pageTitle}</title>
         <meta
           name="description"
-          content="Get an instant residential cleaning estimate from MCJ's Cleaning Service."
+          content="Get a free house cleaning estimate for Huntsville and Madison, AL. Compare Regular, Total and Deep Cleaning options for your home."
         />
         <link
           rel="canonical"
           href="https://mcjscleaningservice.com/estimating"
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://mcjscleaningservice.com/estimating" />
+        <meta property="og:title" content="Cleaning Estimate Huntsville & Madison, AL | MCJ" />
+        <meta property="og:description" content="Request a free house cleaning estimate in Huntsville or Madison, AL. Explore cleaning options and preferred scheduling." />
+        <meta property="og:image" content="https://mcjscleaningservice.com/assets/regularCleaning.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Cleaning Estimate Huntsville & Madison, AL | MCJ" />
+        <meta name="twitter:description" content="Request a free house cleaning estimate in Huntsville or Madison, AL. Explore cleaning options and preferred scheduling." />
+        <meta name="twitter:image" content="https://mcjscleaningservice.com/assets/regularCleaning.jpg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
